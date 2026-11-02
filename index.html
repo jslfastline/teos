@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="TEOS — Tanzania Economic Operating System. A proposed evidence-based digital layer for Tanzania's economy. TRA Innovation Challenge 2026 pilot concept.">
+<meta name="theme-color" content="#FFE600">
+<title>TEOS — Tanzania Economic Operating System | TRA</title>
+<style>
+:root{
+  --bg:#fafaf6;--fg:#111;--card:#fff;--mut:#5f5f57;--line:#e5e3d6;
+  --y:#FFE600;--g:#8a6f00;--soft:#fffbe0;--ok:#0f7a42;--bad:#c92a22;
+  --ink:#111;--shadow:0 14px 36px rgba(17,17,17,.08);--max:1120px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0d0d0b;--fg:#f3f2ea;--card:#171714;--mut:#a3a398;--line:#2c2c26;
+    --soft:#25220a;--g:#e5c63a;--ok:#5fd38d;--bad:#ff8a80;--shadow:0 14px 36px rgba(0,0,0,.35);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0d0d0b;--fg:#f3f2ea;--card:#171714;--mut:#a3a398;--line:#2c2c26;
+  --soft:#25220a;--g:#e5c63a;--ok:#5fd38d;--bad:#ff8a80;--shadow:0 14px 36px rgba(0,0,0,.35);
+  color-scheme:dark;
+}
+:root[data-theme="light"]{color-scheme:light}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;height:100%;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100%;-webkit-font-smoothing:antialiased}
+::selection{background:var(--y);color:#111}
+a{color:inherit}
+button,input,select{font:inherit}
+.skip{position:absolute;left:-9999px;top:8px;z-index:99;background:var(--ink);color:var(--y);padding:10px 16px;border-radius:10px;text-decoration:none}
+.skip:focus{left:16px}
+:focus-visible{outline:3px solid var(--g);outline-offset:2px}
+header{position:sticky;top:0;z-index:30;background:var(--bg);background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:3px solid var(--y)}
+.hw{max-width:var(--max);margin:auto;padding:10px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.lg{height:48px;width:48px;object-fit:contain;background:#fff;border-radius:10px;padding:3px 5px;border:1px solid var(--line);flex:none;display:block}
+.br b{display:block;font:700 17px/1.2 Georgia,serif;letter-spacing:-.01em}
+.br small{display:block;color:var(--mut);font-size:11.5px;letter-spacing:.02em}
+nav{display:flex;gap:3px;margin-left:auto;flex-wrap:wrap}
+nav button{border:0;background:none;color:var(--fg);padding:10px 13px;border-radius:999px;font:600 13.5px/1.2 inherit;cursor:pointer;white-space:nowrap;transition:background .15s,color .15s}
+nav button:hover{background:var(--soft)}
+nav button.on{background:var(--ink);color:var(--y)}
+.theme{width:42px;height:42px;border:1px solid var(--line);border-radius:50%;background:var(--card);color:var(--fg);display:grid;place-items:center;cursor:pointer;flex:none;transition:transform .15s,border-color .15s}
+.theme:hover{transform:translateY(-1px);border-color:var(--g)}
+.theme .ic{width:17px;height:17px}
+main{max-width:var(--max);margin:0 auto;padding:26px 20px 64px;min-height:60vh}
+.v{display:none}
+.v.on{display:block;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+.ic{width:1.25em;height:1.25em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none;vertical-align:-.18em}
+.eyebrow{display:inline-block;font:700 11.5px/1.2 inherit;letter-spacing:.14em;text-transform:uppercase;color:var(--g)}
+.hero{position:relative;overflow:hidden;border-radius:26px;padding:46px;display:grid;grid-template-columns:1.08fr .92fr;gap:32px;align-items:center;background:radial-gradient(circle at 88% 12%,var(--y),transparent 42%),linear-gradient(135deg,var(--soft),var(--card));border:1px solid var(--line)}
+.hero:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 39px,rgba(0,0,0,.035) 39px 40px);pointer-events:none}
+.hero>*{position:relative;z-index:1}
+.hero .eyebrow{background:var(--ink);color:var(--y);padding:5px 12px;border-radius:999px;letter-spacing:.12em}
+.hero-logo{height:76px;width:76px;margin-bottom:14px;border-radius:14px;box-shadow:0 10px 26px rgba(0,0,0,.14)}
+h1{font:700 clamp(32px,5vw,52px)/1.06 Georgia,serif;margin:14px 0 14px;letter-spacing:-.025em;max-width:14ch}
+h1 em{font-style:normal;background:var(--y);color:#111;padding:0 6px;border-radius:6px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.hero h1{max-width:18ch}
+.lead{font-size:17px;line-height:1.65;color:var(--mut);max-width:57ch;margin:0 0 22px}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.tiny{font-size:12.5px;color:var(--mut);margin:15px 0 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;background:var(--ink);color:var(--y);padding:12px 20px;border-radius:12px;font:700 14px/1.2 inherit;cursor:pointer;transition:transform .15s,box-shadow .15s,border-color .15s;text-decoration:none}
+.btn:hover{transform:translateY(-1px);box-shadow:0 9px 22px rgba(0,0,0,.18)}
+.btn .ic{width:17px;height:17px}
+.btn.ghost{background:transparent;color:var(--fg);border-color:var(--line)}
+.btn.ghost:hover{background:var(--card);border-color:var(--fg)}
+.btn.light{background:var(--y);color:#111}
+.btn.ok{background:#0f7a42;color:#fff}
+.btn.sm{padding:9px 14px;font-size:13px}
+.link{background:none;border:0;color:var(--g);font:600 13.5px inherit;cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:6px 2px}
+
+.hero-mydbi{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+.mydbi-desc{font-size:13px;color:var(--mut);margin:10px 0 12px;line-height:1.5}
+.mydbi-tabs{display:flex;gap:6px;margin:0 0 12px}
+.mydbi-tabs button{flex:1;padding:9px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);color:var(--fg);font:600 13px inherit;cursor:pointer}
+.mydbi-tabs button.on{border-color:var(--ink);background:var(--ink);color:var(--y)}
+.hero-mydbi label{display:block;font-size:12.5px;font-weight:600;margin:0 0 6px}
+.hero-mydbi input{
+.mydbi-result .res{flex-direction:column}
+.mydbi-result .qr{width:120px;height:120px}
+.mydbi-result .res-info{min-width:0;width:100%}
+.mydbi-result .kv{grid-template-columns:100px 1fr}
+width:100%;padding:11px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);color:var(--fg);font:inherit}
+.mydbi-result{margin-top:14px}
+.mydbi-result .card{margin-top:0}
+
+.hero-panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+.panel-top{display:flex;align-items:center;gap:8px;padding-bottom:12px;border-bottom:1px solid var(--line);font-size:13px}
+.panel-top b{font:700 13px inherit}
+.pill{margin-left:auto;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:3px 8px}
+.live-dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(15,122,66,.15)}
+.ev-list{display:grid;padding:6px 0}
+.ev{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px dashed var(--line)}
+.ev:last-child{border-bottom:0}
+.ev-icon{width:32px;height:32px;border-radius:9px;background:var(--soft);color:var(--g);display:grid;place-items:center;flex:none}
+.ev-icon .ic{width:17px;height:17px}
+.ev b{display:block;font-size:13px;line-height:1.3}
+.ev small{display:block;font-size:11.5px;color:var(--mut);line-height:1.35}
+.ev .tag-ok{margin-left:auto;font-size:9.5px;font-weight:700;color:var(--ok);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+.merge{height:18px;display:grid;place-items:center}
+.merge span{width:2px;height:18px;background:linear-gradient(var(--line),var(--g))}
+.verified-row{display:flex;align-items:center;gap:10px;background:var(--soft);border:1px solid rgba(138,111,0,.28);border-radius:12px;padding:10px}
+.verified-row b{display:block;font-size:13px;line-height:1.3}
+.verified-row small{display:block;font-size:11.5px;color:var(--mut);line-height:1.35}
+.risk{margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+.risk-top{display:flex;justify-content:space-between;gap:12px;font-size:11.5px;color:var(--mut)}
+.risk-top b{color:var(--fg)}
+.risk-bar{height:7px;border-radius:999px;background:var(--line);overflow:hidden;margin:7px 0}
+.risk-bar i{display:block;height:100%;background:var(--ok);border-radius:inherit}
+.risk small{font-size:11px;color:var(--mut);line-height:1.4}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;align-items:baseline;gap:8px}
+.stat b{font:700 27px/1 Georgia,serif;color:var(--g)}
+.stat span{font-size:12px;color:var(--mut);line-height:1.35}
+.section{margin-top:46px}
+.section-head{max-width:780px;margin-bottom:18px}
+.section-head h2,.section h2{font:700 clamp(23px,3vw,30px)/1.2 Georgia,serif;margin:0 0 7px;letter-spacing:-.015em}
+.section-head p,.section>p{color:var(--mut);margin:0 0 10px}
+h3{font-size:16px;margin:0 0 4px}
+p{margin:0 0 10px}
+.compare-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--card);-webkit-overflow-scrolling:touch}
+.compare{width:100%;border-collapse:collapse;min-width:690px;font-size:14px}
+.compare th,.compare td{padding:12px 16px;text-align:left;border-top:1px solid var(--line);vertical-align:top}
+.compare thead th{background:var(--ink);color:#fff;border:0;font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+.compare thead th:last-child{color:var(--y)}
+.compare tbody th{font-weight:600;white-space:nowrap}
+.compare tbody td:last-child{background:var(--soft);font-weight:500}
+.compare tbody tr:first-child th,.compare tbody tr:first-child td{border-top:0}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;position:relative}
+.step .num{position:absolute;top:14px;right:16px;font:700 12px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--mut)}
+.ic-wrap{width:38px;height:38px;border-radius:11px;background:var(--soft);color:var(--g);display:grid;place-items:center;margin-bottom:10px}
+.ic-wrap .ic{width:21px;height:21px}
+.step h3{font-size:15px;margin:0 0 4px}
+.step p{font-size:13px;color:var(--mut);margin:0;line-height:1.5}
+.split{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:start}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.chip{font-size:12.5px;font-weight:600;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--fg)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+.why{padding:22px}
+.ticks{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:12px}
+.ticks li{display:flex;gap:10px;align-items:flex-start}
+.ticks .ic{width:18px;height:18px;color:var(--ok);margin-top:2px}
+.ticks b{display:block;font-size:13.5px;line-height:1.35}
+.ticks span{display:block;font-size:12.5px;color:var(--mut);line-height:1.45}
+.band{display:flex;align-items:center;justify-content:space-between;gap:20px;background:var(--ink);color:#fff;border-radius:20px;padding:28px 30px;margin-top:46px;border:1px solid var(--line)}
+.band h2{color:var(--y);margin:0 0 4px;font-size:clamp(22px,3vw,28px)}
+.band p{color:#d8d8ce;margin:0;font-size:14px;max-width:62ch}
+.band .btn.light{flex:none}
+.page-head{max-width:820px;margin:6px 0 24px}
+.page-head h1{font-size:clamp(30px,4.5vw,44px);margin:8px 0 8px;max-width:18ch}
+.page-head p{color:var(--mut);font-size:16px;margin:0}
+.choice{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:820px}
+.opt{display:block;cursor:pointer;text-align:left;font:inherit;color:var(--fg);transition:transform .2s,border-color .2s,box-shadow .2s;border:1.5px solid var(--line);border-top:4px solid var(--y);background:var(--card);border-radius:18px;padding:22px;width:100%}
+.opt:hover,.opt.on{border-color:var(--fg);border-top-color:var(--y);transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.12)}
+.opt .opt-icon{width:42px;height:42px;border-radius:12px;background:var(--soft);color:var(--g);display:grid;place-items:center}
+.opt .opt-icon .ic{width:22px;height:22px}
+.opt b{font-size:17px;display:block;margin:11px 0 4px}
+.opt>span{display:block;color:var(--mut);font-size:13px;line-height:1.45}
+.opt .opt-cta{display:flex;align-items:center;gap:6px;color:var(--g);font-weight:700;font-size:13px;margin-top:14px}
+.opt .opt-cta .ic{width:15px;height:15px}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.info-grid.three{grid-template-columns:repeat(3,1fr)}
+.info-grid .card h3{display:flex;align-items:center;gap:8px}
+.note{background:var(--soft);border:1px solid rgba(138,111,0,.3);border-radius:12px;padding:12px 14px;font-size:13px;color:var(--fg);margin:14px 0;line-height:1.55}
+.note b{color:var(--g)}
+.wrap{max-width:780px;margin:0 auto}
+.back{display:inline-flex;align-items:center;gap:6px;background:none;border:0;color:var(--mut);font:600 13px inherit;cursor:pointer;padding:4px 0;margin-bottom:8px}
+.back .ic{width:15px;height:15px}
+.back:hover{color:var(--fg)}
+.stepper{display:flex;gap:0;list-style:none;padding:0;margin:0 0 20px;border:1px solid var(--line);background:var(--card);border-radius:14px;overflow:hidden}
+.stepper li{flex:1;display:flex;align-items:center;gap:8px;padding:11px 14px;font-size:12.5px;color:var(--mut);border-left:1px solid var(--line);min-width:0}
+.stepper li:first-child{border-left:0}
+.stepper li b{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--line);color:var(--fg);font-size:11px;flex:none}
+.stepper li.on{color:var(--fg);background:var(--soft);font-weight:700}
+.stepper li.on b{background:var(--ink);color:var(--y)}
+.stepper li.done b{background:var(--ok);color:#fff}
+.stepper li.done{color:var(--fg)}
+.form label{display:block;font-weight:600;font-size:12.5px;margin:14px 0 0}
+input,select{width:100%;padding:12px 13px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--fg);margin-top:5px;transition:border-color .15s,box-shadow .15s}
+input:focus,select:focus{outline:none;border-color:var(--g);box-shadow:0 0 0 3px rgba(138,111,0,.14)}
+input::placeholder{color:var(--mut);opacity:.7}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.err{color:var(--bad);font-weight:600;font-size:13px;margin:8px 0;line-height:1.45}
+.err:empty{display:none}
+.tabs{display:flex;gap:6px;margin:10px 0 14px}
+.tabs button{flex:1;padding:10px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);color:var(--fg);font:600 13.5px inherit;cursor:pointer}
+.tabs button.on{border-color:var(--ink);background:var(--ink);color:var(--y)}
+.res{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start}
+.qr{background:#fff;padding:14px;border:3px solid #111;border-radius:12px;width:150px;height:150px;flex:none}
+.qr svg{width:100%;height:100%;display:block}
+.qr-fallback{display:grid;place-items:center;height:100%;font-weight:700;color:#111}
+.res-info{flex:1;min-width:220px}
+.id{background:var(--y);color:#111;font:700 18px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;padding:4px 10px;border-radius:8px;display:inline-block;letter-spacing:.02em}
+.kv{display:grid;grid-template-columns:130px 1fr;gap:8px 14px;margin:12px 0 0}
+.kv dt{color:var(--mut);font-size:13px}
+.kv dd{margin:0;font-weight:600;word-break:break-word;font-size:13.5px}
+.status{display:inline-flex;align-items:center;gap:6px;color:var(--ok);font-weight:700;font-size:12.5px}
+.status i{width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block;flex:none}
+.result-card{margin-top:14px}
+.result-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.pvi{width:100%;max-width:720px;border-radius:14px;box-shadow:var(--shadow);display:block;margin:14px 0 6px;border:1px solid var(--line)}
+.small{font-size:12px;color:var(--mut);line-height:1.5}
+.success{display:flex;align-items:center;gap:10px;color:var(--ok);font:700 18px Georgia,serif;margin:4px 0 12px}
+.success .ic{width:22px;height:22px}
+.actions-end{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.layers{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.layer{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;position:relative;border-top:4px solid var(--y)}
+.lnum{position:absolute;top:14px;right:16px;font:700 12px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--mut)}
+.layer h3{font-size:15.5px;margin:10px 0 4px;padding-right:26px}
+.layer p{font-size:13px;color:var(--mut);margin:0;line-height:1.5}
+.principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:10px}
+.principle{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.principle b{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--soft);color:var(--g);font-size:12px;margin-bottom:8px}
+.principle h3{font-size:14px;line-height:1.35}
+.principle p{font-size:12.5px;color:var(--mut);margin:0;line-height:1.5}
+.roadmap{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.phase{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;border-top:4px solid var(--g)}
+.phase .pnum{font:700 10.5px/1.2 inherit;letter-spacing:.1em;text-transform:uppercase;color:var(--g)}
+.phase h3{font-size:15px;margin:6px 0 2px;line-height:1.3}
+.phase .dur{font-size:12px;color:var(--mut);font-weight:600}
+.phase p{font-size:12.5px;color:var(--mut);margin:8px 0 0;line-height:1.5}
+.bench{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.bench .big{display:block;font:700 34px/1.1 Georgia,serif;color:var(--g);margin:4px 0 6px}
+.bench small{display:block;margin-top:10px;padding-top:10px;border-top:1px solid var(--line);font-size:12px;color:var(--mut);line-height:1.5}
+.source{font-size:11.5px;color:var(--mut);margin-top:10px}
+.faq-list{max-width:840px;display:grid;gap:8px}
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+summary{display:flex;align-items:center;gap:12px;padding:15px 18px;font-weight:600;cursor:pointer;list-style:none;line-height:1.4}
+summary::-webkit-details-marker{display:none}
+summary .qnum{font:700 11px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--g);min-width:22px}
+summary:after{content:"+";margin-left:auto;font:400 21px/1 system-ui;color:var(--mut);flex:none}
+details[open] summary:after{content:"−"}
+details p{padding:0 18px 16px 52px;color:var(--mut);font-size:14px;margin:0;line-height:1.65}
+details[open]{border-color:var(--g)}
+.center{text-align:center;margin-top:18px}
+footer{max-width:var(--max);margin:0 auto;padding:22px 20px 30px;text-align:center;color:var(--mut);font-size:12.5px;border-top:1px solid var(--line);line-height:1.6}
+#toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,10px);background:var(--ink);color:var(--y);padding:10px 18px;border-radius:999px;font-weight:600;font-size:13px;opacity:0;transition:opacity .25s,transform .25s;z-index:60;pointer-events:none;max-width:92%;text-align:center}
+#toast.s{opacity:1;transform:translate(-50%,0)}
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;padding:34px}
+  
+.hero-mydbi{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+.mydbi-desc{font-size:13px;color:var(--mut);margin:10px 0 12px;line-height:1.5}
+.mydbi-tabs{display:flex;gap:6px;margin:0 0 12px}
+.mydbi-tabs button{flex:1;padding:9px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);color:var(--fg);font:600 13px inherit;cursor:pointer}
+.mydbi-tabs button.on{border-color:var(--ink);background:var(--ink);color:var(--y)}
+.hero-mydbi label{display:block;font-size:12.5px;font-weight:600;margin:0 0 6px}
+.hero-mydbi input{
+.mydbi-result .res{flex-direction:column}
+.mydbi-result .qr{width:120px;height:120px}
+.mydbi-result .res-info{min-width:0;width:100%}
+.mydbi-result .kv{grid-template-columns:100px 1fr}
+width:100%;padding:11px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);color:var(--fg);font:inherit}
+.mydbi-result{margin-top:14px}
+.mydbi-result .card{margin-top:0}
+
+.hero-panel{max-width:560px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .roadmap{grid-template-columns:repeat(2,1fr)}
+  .split{grid-template-columns:1fr}
+  .info-grid.three{grid-template-columns:1fr 1fr}
+}
+@media(max-width:620px){
+  main{padding:18px 14px 48px}
+  .hw{padding:10px 14px;gap:10px}
+  .br b{font-size:15px}
+  .br small{font-size:10.5px}
+  .lg{height:42px;width:42px}
+  .theme{order:2}
+  .brand{order:1;flex:1}
+  nav{order:3;margin-left:0;width:100%;justify-content:flex-start;overflow-x:auto;padding-bottom:2px;flex-wrap:nowrap;scrollbar-width:none}
+  nav::-webkit-scrollbar{display:none}
+  nav button{padding:10px 11px;font-size:13px}
+  .hero{padding:26px 20px;border-radius:20px}
+  .hero h1{font-size:clamp(30px,9vw,40px);max-width:100%}
+  .lead{font-size:15.5px}
+  .stats{grid-template-columns:1fr 1fr}
+  .steps,.roadmap,.choice,.info-grid,.info-grid.three,.bench,.two{grid-template-columns:1fr}
+  .band{flex-direction:column;align-items:flex-start;padding:22px}
+  .band .btn{width:100%}
+  .compare{min-width:600px}
+  .stepper li span{display:none}
+  .stepper li{justify-content:center;padding:11px 8px}
+  .stepper li b{width:24px;height:24px}
+  details p{padding-left:18px}
+  .res{flex-direction:column}
+  .qr{width:130px;height:130px}
+  .kv{grid-template-columns:108px 1fr}
+  .pvi{max-width:100%}
+  .page-head h1{max-width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-id" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M6.5 16c.5-1.5 1.8-2.2 2.5-2.2s2 .7 2.5 2.2"/><path d="M15 10h4M15 14h4"/></symbol>
+  <symbol id="i-form" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 16 9 5 9-5"/></symbol>
+  <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2Z"/><path d="M9 8h6M9 12h6M9 16h3"/></symbol>
+  <symbol id="i-store" viewBox="0 0 24 24"><path d="M3 9 4.5 4h15L21 9"/><path d="M4 9v11h16V9"/><path d="M9 20v-6h6v6"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4.5 6v6c0 4.5 3.2 7.8 7.5 9 4.3-1.2 7.5-4.5 7.5-9V6Z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-bank" viewBox="0 0 24 24"><path d="m3 10 9-6 9 6"/><path d="M5 10v8M9 10v8M15 10v8M19 10v8"/><path d="M3 21h18"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4 18a8 8 0 1 1 16 0"/><path d="m12 14 4-5"/><circle cx="12" cy="18" r="1"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M5 7h14"/><path d="m5 7-3 6h6Z"/><path d="m19 7-3 6h6Z"/><path d="M8 21h8"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5Z"/></symbol>
+  <symbol id="i-question" viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4Z"/><path d="M9.5 9a2.5 2.5 0 1 1 4 2c-.9.7-1.5 1.2-1.5 2.3"/><path d="M12 17h.01"/></symbol>
+</svg>
+
+<header>
+  <div class="hw">
+    <div class="brand">
+      <img class="lg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E" alt="Tanzania Revenue Authority emblem">
+      <div class="br"><b>Tanzania Revenue Authority</b><small>Tanzania Economic Operating System (TEOS)</small></div>
+    </div>
+    <nav id="nav" aria-label="Main navigation"></nav>
+    <button class="theme" id="themeBtn" type="button" aria-label="Switch colour theme"></button>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="v" id="home">
+    <div class="hero">
+      <div>
+        <img class="lg hero-logo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E" alt="Tanzania Revenue Authority emblem">
+        <span class="eyebrow">TRA Innovation Challenge 2026</span>
+        <h1>Tanzania Economic <em>Operating System</em></h1>
+        <p class="lead">A proposed national layer that helps TRA see what actually happened in the economy — by connecting business identity, daily transactions, supplier records, mobile money and customer confirmation.</p>
+        <div class="hero-actions">
+          <button class="btn" type="button" onclick="go('dbi');resetC();go('create')">Get a Business ID <svg class="ic" aria-hidden="true"><use href="#i-arrow"></use></svg></button>
+          <button class="btn ghost" type="button" onclick="go('how')">How TEOS works</button>
+        </div>
+        <p class="tiny">Pilot concept · All figures and records are illustrative.</p>
+      </div>
+      <div class="hero-mydbi" aria-label="My DBI Card lookup">
+        <div class="panel-top"><span class="live-dot"></span><b>My DBI Card</b><span class="pill">Lookup</span></div>
+        <p class="mydbi-desc">Check if your Business ID (DBI) is already registered. Enter your NIDA or TIN to view your card.</p>
+        <div class="mydbi-tabs">
+          <button type="button" class="on" id="hkn" onclick="hkpick('nida')">NIDA</button>
+          <button type="button" id="hkt" onclick="hkpick('tin')">TIN</button>
+        </div>
+        <label for="hkv" id="hkl">NIDA number (20 digits)</label>
+        <input id="hkv" inputmode="numeric" autocomplete="off" placeholder="19950612123451234512">
+        <div class="hero-actions" style="margin-top:10px">
+          <button class="btn" type="button" onclick="hfind()"><svg class="ic" aria-hidden="true"><use href="#i-search"></use></svg> View my DBI Card</button>
+        </div>
+        <div id="hke" class="err" role="alert" style="margin-top:8px"></div>
+        <div id="hkr" class="mydbi-result"></div>
+      </div>
+    </div>
+
+    <div class="stats" aria-label="TEOS at a glance">
+      <div class="stat"><b>7</b><span>connected layers</span></div>
+      <div class="stat"><b>5</b><span>design principles</span></div>
+      <div class="stat"><b>4</b><span>gated phases</span></div>
+      <div class="stat"><b>24</b><span>months to nationwide rollout</span></div>
+    </div>
+
+    <section class="section">
+      <div class="section-head">
+        <span class="eyebrow">The shift</span>
+        <h2>From declared receipts to connected evidence</h2>
+        <p>Today TRA mainly sees what a business chooses to issue. TEOS compares several independent records, so an assessment is based on what the evidence says actually happened.</p>
+      </div>
+      <div class="compare-wrap">
+        <table class="compare">
+          <thead><tr><th scope="col">Dimension</th><th scope="col">Current VFD / EFDMS</th><th scope="col">TEOS proposal</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Primary evidence</th><td>Taxpayer-issued receipt</td><td>Multiple independent digital sources</td></tr>
+            <tr><th scope="row">Informal coverage</th><td>Very limited</td><td>A core design target: motorcycle taxis, street vendors, food vendors, barbers, farmers</td></tr>
+            <tr><th scope="row">Verification</th><td>Largely self-declared</td><td>Cross-referenced with supplier, bank, mobile money and customer data</td></tr>
+            <tr><th scope="row">Audit targeting</th><td>General or manual selection</td><td>AI-assisted risk score with human review and appeal</td></tr>
+            <tr><th scope="row">Assessment</th><td>Officer-negotiated in disputed cases</td><td>Evidence-computed, officer-reviewed</td></tr>
+            <tr><th scope="row">Citizen role</th><td>Passive recipient of a receipt</td><td>Active verifier, with reward points or lottery eligibility</td></tr>
+            <tr><th scope="row">Government view</th><td>Periodic filings and aggregated receipts</td><td>Real-time national economic dashboard</td></tr>
+            <tr><th scope="row">Rollout</th><td>N/A</td><td>24-month, four-phase, gated rollout</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <span class="eyebrow">How it works</span>
+        <h2>Four steps, one clear chain</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><span class="num">01</span><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-id"></use></svg></span><h3>Identify</h3><p>Every business gets a Digital Business Identity, linked to a NIDA-verified owner and, where available, a TIN.</p></div>
+        <div class="step"><span class="num">02</span><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-receipt"></use></svg></span><h3>Capture</h3><p>Sector-fit tools record the natural unit of work — a sale, a service, an order or a trip. USSD and offline hubs included.</p></div>
+        <div class="step"><span class="num">03</span><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-shield"></use></svg></span><h3>Verify</h3><p>Sales are compared with supplier deliveries, bank and mobile-money flows, and customer QR confirmations.</p></div>
+        <div class="step"><span class="num">04</span><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-gauge"></use></svg></span><h3>Assess</h3><p>A risk signal directs officers to the few cases that need review. The business can respond and appeal.</p></div>
+      </div>
+    </section>
+
+    <section class="section split">
+      <div>
+        <span class="eyebrow">Who it serves</span>
+        <h2>Built for the whole economy</h2>
+        <p>TEOS starts with the operators that a receipt-only system reaches least, and connects them to the same evidence chain used by larger businesses.</p>
+        <div class="chips" aria-label="Business types covered by TEOS">
+          <span class="chip">Motorcycle taxis</span><span class="chip">Street vendors</span><span class="chip">Food vendors</span><span class="chip">Barbers &amp; salons</span><span class="chip">Shops</span><span class="chip">Restaurants</span><span class="chip">Hotels</span><span class="chip">Pharmacies</span><span class="chip">Garages</span><span class="chip">Clinics</span><span class="chip">Farmers</span><span class="chip">Large businesses</span>
+        </div>
+      </div>
+      <div class="card why">
+        <h3>Why it matters</h3>
+        <ul class="ticks">
+          <li><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg><div><b>Wider coverage</b><span>A low-friction identity for the informal sector, without making full BRELA registration a precondition.</span></div></li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg><div><b>Fairer assessment</b><span>Evidence-based, officer-reviewed, with a defined response period and a right of appeal.</span></div></li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg><div><b>Better decisions</b><span>A real-time view of revenue and economic activity for audit targeting and policy.</span></div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section band">
+      <div><span class="eyebrow" style="color:var(--y)">Start here</span><h2>Get a Digital Business Identity</h2><p>Create a sample DBI in a few steps. No full BRELA registration is required for the basic identity.</p></div>
+      <button class="btn light" type="button" onclick="go('dbi')">Create a Business ID</button>
+    </section>
+
+    <div class="center"><button class="btn ghost" type="button" onclick="go('faq')">Read all 10 questions about TEOS</button></div>
+  </section>
+
+  <section class="v" id="dbi">
+    <div class="page-head">
+      <span class="eyebrow">Business identity</span>
+      <h1>Digital Business Identity</h1>
+      <p>One portable identity for every business or self-employed person. A DBI links a NIDA-verified owner, a phone number, a sector and a location to a QR-coded record.</p>
+    </div>
+    <div class="choice">
+      <button class="opt" type="button" onclick="resetC();go('create')">
+        <span class="opt-icon"><svg class="ic" aria-hidden="true"><use href="#i-id"></use></svg></span>
+        <b>Create a new DBI</b>
+        <span>For a business that is not yet registered in TEOS.</span>
+        <span class="opt-cta">Start <svg class="ic" aria-hidden="true"><use href="#i-arrow"></use></svg></span>
+      </button>
+      <button class="opt" type="button" onclick="resetK();go('check')">
+        <span class="opt-icon"><svg class="ic" aria-hidden="true"><use href="#i-search"></use></svg></span>
+        <b>Find my DBI</b>
+        <span>Recover, view or download an existing card.</span>
+        <span class="opt-cta">Search <svg class="ic" aria-hidden="true"><use href="#i-arrow"></use></svg></span>
+      </button>
+    </div>
+    <div class="info-grid">
+      <div class="card">
+        <h3><svg class="ic" aria-hidden="true"><use href="#i-form"></use></svg> What you need</h3>
+        <ul class="ticks">
+          <li><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg><div><span>A NIDA number, or a TIN if you have one.</span></div></li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg><div><span>A business name and a mobile number.</span></div></li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg><div><span>Optional: region and street or area.</span></div></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><svg class="ic" aria-hidden="true"><use href="#i-id"></use></svg> What you get</h3>
+        <ul class="ticks">
+          <li><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg><div><span>A DBI number in the form TZB-2026-XXXXXXX.</span></div></li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg><div><span>A QR card and a downloadable PNG.</span></div></li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg><div><span>A record stored in this browser for the pilot.</span></div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="note"><b>Where it fits:</b> the DBI is Layer 1 of the seven-layer TEOS architecture. It is the anchor for every later transaction, risk signal and dashboard total. <button class="link" type="button" onclick="go('how')">See the architecture</button></div>
+    <div class="note"><b>Pilot note:</b> this page is browser-based. A production DBI would be issued through secure NIDA and TRA integrations, with consent, audit logs and the safeguards of Tanzania's Personal Data Protection Act, 2022.</div>
+  </section>
+
+  <section class="v" id="create">
+    <div class="wrap">
+      <button class="back" type="button" onclick="go('dbi')"><svg class="ic" aria-hidden="true"><use href="#i-back"></use></svg> Back to Business ID</button>
+      <div class="page-head">
+        <span class="eyebrow">Create a DBI</span>
+        <h1>Create your Business ID</h1>
+        <p>Verify your identity, add your business details and download your card. The demo stores records only in this browser.</p>
+      </div>
+
+      <ol class="stepper" id="stepper" aria-label="Progress">
+        <li class="on" data-step="1"><b>1</b><span>Identity</span></li>
+        <li data-step="2"><b>2</b><span>Business</span></li>
+        <li data-step="3"><b>3</b><span>Card</span></li>
+      </ol>
+
+      <div id="c1">
+        <div class="section-head"><h2>How would you like to verify your identity?</h2><p>Choose the record you already hold. Both routes lead to the same DBI.</p></div>
+        <div class="choice">
+          <button class="opt" id="mn" type="button" onclick="pick('nida')">
+            <span class="opt-icon"><svg class="ic" aria-hidden="true"><use href="#i-id"></use></svg></span>
+            <b>Use NIDA</b>
+            <span>Verify the owner's identity with a 20-digit NIDA number.</span>
+            <span class="opt-cta">Choose NIDA <svg class="ic" aria-hidden="true"><use href="#i-arrow"></use></svg></span>
+          </button>
+          <button class="opt" id="mt" type="button" onclick="pick('tin')">
+            <span class="opt-icon"><svg class="ic" aria-hidden="true"><use href="#i-bank"></use></svg></span>
+            <b>Use TIN</b>
+            <span>Use an existing 9-digit TRA Taxpayer Identification Number.</span>
+            <span class="opt-cta">Choose TIN <svg class="ic" aria-hidden="true"><use href="#i-arrow"></use></svg></span>
+          </button>
+        </div>
+        <div class="note"><b>Demo details:</b> use NIDA <b>19950612123451234512</b> to open an existing sample record, or enter any other 20-digit number to create a new DBI. The TIN demo is <b>123456789</b>.</div>
+      </div>
+
+      <div id="c2" hidden class="form">
+        <div class="card">
+          <label for="num" id="nl">NIDA number (20 digits)</label>
+          <input id="num" inputmode="numeric" autocomplete="off" placeholder="19950612123451234512">
+          <div class="hero-actions" style="margin-top:6px">
+            <button class="btn" type="button" onclick="look()">Look up my details</button>
+            <button class="link" type="button" onclick="useDemo()">Use demo details</button>
+          </div>
+          <div id="ce" class="err" role="alert"></div>
+          <div class="note">Demo note: NIDA and TIN records are generated for illustration. A production system would call the NIDA and TRA APIs through a secure, consented integration.</div>
+        </div>
+      </div>
+
+      <div id="c3" hidden>
+        <div class="card">
+          <div class="success"><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg><span id="ct">Identity found</span></div>
+          <div id="ci"></div>
+          <div class="hero-actions" style="margin-top:14px">
+            <button class="btn ok" type="button" onclick="confirmId()"><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg> Yes, this is me — continue</button>
+            <button class="link" type="button" onclick="backToIdentity()">Use a different number</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="c4" hidden class="form">
+        <div class="card">
+          <h3>Business details</h3>
+          <label for="bn">Business name *</label>
+          <input id="bn" maxlength="60" placeholder="e.g. Mama Rehema Food Vendor" autocomplete="organization">
+          <label for="bp">Mobile number *</label>
+          <input id="bp" maxlength="15" inputmode="tel" placeholder="0712 345 678" autocomplete="tel">
+          <div class="two">
+            <div>
+              <label for="br">Region (optional)</label>
+              <select id="br">
+                <option value="">— Select (optional) —</option>
+                <option>Dar es Salaam</option><option>Mbeya</option><option>Mwanza</option><option>Arusha</option><option>Dodoma</option><option>Morogoro</option><option>Iringa</option><option>Other</option>
+              </select>
+            </div>
+            <div>
+              <label for="bl">Street or area (optional)</label>
+              <input id="bl" maxlength="60" placeholder="e.g. Soko Kuu, Mwanjelwa">
+            </div>
+          </div>
+          <div id="cf" class="err" role="alert"></div>
+          <button class="btn" type="button" onclick="make()">Create my DBI <svg class="ic" aria-hidden="true"><use href="#i-arrow"></use></svg></button>
+        </div>
+      </div>
+
+      <div id="c5" hidden></div>
+    </div>
+  </section>
+
+  <section class="v" id="check">
+    <div class="wrap">
+      <button class="back" type="button" onclick="go('dbi')"><svg class="ic" aria-hidden="true"><use href="#i-back"></use></svg> Back to Business ID</button>
+      <div class="page-head">
+        <span class="eyebrow">Find a DBI</span>
+        <h1>Find my Business ID</h1>
+        <p>Search the records saved in this browser. The sample record is available under both NIDA and TIN.</p>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Search by">
+        <button class="on" id="kn" type="button" role="tab" aria-selected="true" onclick="kpick('nida')">NIDA</button>
+        <button id="kt" type="button" role="tab" aria-selected="false" onclick="kpick('tin')">TIN</button>
+      </div>
+      <div class="form">
+        <label for="kv" id="kvl">NIDA number (20 digits)</label>
+        <input id="kv" inputmode="numeric" autocomplete="off" placeholder="19950612123451234512">
+        <button class="btn" type="button" onclick="find()"><svg class="ic" aria-hidden="true"><use href="#i-search"></use></svg> Search</button>
+        <div class="note"><b>Demo:</b> NIDA <b>19950612123451234512</b> or TIN <b>123456789</b>. Records you create are saved in this browser only.</div>
+        <div id="kr"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="v" id="how">
+    <div class="page-head">
+      <span class="eyebrow">Inside the proposal</span>
+      <h1>How TEOS works</h1>
+      <p>Seven layers connect a single transaction at street level to a verified national record. Five design principles keep the system fair, and four gated phases manage the rollout.</p>
+    </div>
+
+    <section class="section">
+      <div class="section-head"><span class="eyebrow">Architecture</span><h2>Seven connected layers</h2><p>Each layer has one job. Together they form a pipeline from a transaction to a verified entry in the national system.</p></div>
+      <div class="layers">
+        <article class="layer"><span class="lnum">01</span><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-id"></use></svg></span><h3>National Business Identity</h3><p>A single DBI for every economic actor, including informal operators, linked to NIDA, TIN and location.</p></article>
+        <article class="layer"><span class="lnum">02</span><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-receipt"></use></svg></span><h3>Smart Capture</h3><p>Sector-fit tools: POS scans, service buttons, kitchen orders, trip records and USSD. The receipt is an output, not extra work.</p></article>
+        <article class="layer"><span class="lnum">03</span><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-store"></use></svg></span><h3>Smart Business Hub</h3><p>An offline-first local hub that stores transactions and syncs when connectivity returns, so no sale is lost.</p></article>
+        <article class="layer"><span class="lnum">04</span><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-users"></use></svg></span><h3>Customer Participation</h3><p>QR-verified receipts with reward points, lottery eligibility or cashback turn customers into informal verifiers.</p></article>
+        <article class="layer"><span class="lnum">05</span><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-gauge"></use></svg></span><h3>Risk Intelligence</h3><p>AI-assisted scoring across evidence streams. It prioritises cases for human review, not automatic penalties.</p></article>
+        <article class="layer"><span class="lnum">06</span><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-chart"></use></svg></span><h3>National Economic Dashboard</h3><p>Real-time, aggregated visibility of revenue and economic activity for TRA and policymakers, without exposing business-level detail.</p></article>
+        <article class="layer"><span class="lnum">07</span><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-bank"></use></svg></span><h3>Government Integration</h3><p>Secure links with NIDA, BRELA, BOT, banks, mobile money, LGA/RITA and ZRA, governed by data-sharing agreements.</p></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><span class="eyebrow">Design philosophy</span><h2>Five principles</h2></div>
+      <div class="principles">
+        <div class="principle"><b>1</b><h3>Every activity leaves a digital footprint</h3><p>Record the sector's natural unit of work, not a separate receipt task.</p></div>
+        <div class="principle"><b>2</b><h3>Multiple independent sources of truth</h3><p>No single actor's report is treated as final.</p></div>
+        <div class="principle"><b>3</b><h3>The customer as an informal verifier</h3><p>A QR receipt and reward give the customer a reason to confirm.</p></div>
+        <div class="principle"><b>4</b><h3>AI-assisted risk scoring, not universal inspection</h3><p>Direct scarce audit capacity to the few well-documented cases.</p></div>
+        <div class="principle"><b>5</b><h3>Assessment without manual negotiation</h3><p>Liability is computed from evidence; the officer reviews rather than negotiates.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><span class="eyebrow">Safeguards</span><h2>Human oversight is built in</h2><p>A risk score is a prioritisation signal, not a verdict. The proposal deliberately keeps a human decision and an appeal route between the algorithm and any penalty.</p></div>
+      <div class="info-grid three">
+        <div class="card"><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-scale"></use></svg></span><h3>Review before penalty</h3><p class="small">The business is notified of the specific discrepancy and given a defined period to respond with evidence. An officer records a reasoned decision.</p></div>
+        <div class="card"><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg></span><h3>Right of appeal</h3><p class="small">Both the AI's reasoning and the officer's decision are visible, logged and reviewable. The business can challenge an assessment.</p></div>
+        <div class="card"><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-lock"></use></svg></span><h3>Data protection</h3><p class="small">Lawful purpose, minimisation, access controls, encryption, retention rules and consent for optional reward data under the Personal Data Protection Act, 2022.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><span class="eyebrow">Inclusion</span><h2>Connectivity cannot be a precondition</h2></div>
+      <div class="info-grid three">
+        <div class="card"><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-store"></use></svg></span><h3>Smart Business Hub</h3><p class="small">Stores transactions locally and syncs when the network returns. A temporary outage does not lose a sale.</p></div>
+        <div class="card"><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-phone"></use></svg></span><h3>USSD for basic phones</h3><p class="small">Record a sale, check today's total or retrieve a receipt number without mobile data or a smartphone.</p></div>
+        <div class="card"><span class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-receipt"></use></svg></span><h3>Sector-fit capture</h3><p class="small">A barber logs a haircut with one tap; a restaurant logs an order; a shop scans a barcode. The tool follows the work.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><span class="eyebrow">Roadmap</span><h2>A 24-month, gated rollout</h2><p>Each phase ends with a formal go/no-go review against agreed metrics, rather than proceeding on a fixed calendar alone.</p></div>
+      <div class="roadmap">
+        <article class="phase"><span class="pnum">Phase 1</span><h3>Pilot</h3><span class="dur">Months 1–6</span><p>One region and a limited sector set: retail, motorcycle taxis and one informal sector. Core platform, DBI issuance, data-sharing agreements and baseline risk model.</p></article>
+        <article class="phase"><span class="pnum">Phase 2</span><h3>Medium businesses</h3><span class="dur">Months 7–12</span><p>Two or three more regions. Smart Business Hub deployed, customer reward layer launched, officer training completed.</p></article>
+        <article class="phase"><span class="pnum">Phase 3</span><h3>Large businesses</h3><span class="dur">Months 13–18</span><p>Full government integration with NIDA, BRELA, banks and mobile money. National dashboard live internally within TRA.</p></article>
+        <article class="phase"><span class="pnum">Phase 4</span><h3>Nationwide</h3><span class="dur">Months 19–24</span><p>All regions and sectors, including the USSD channel. Public dashboard elements and an independent impact evaluation.</p></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><span class="eyebrow">International benchmarks</span><h2>What other countries show</h2></div>
+      <div class="bench">
+        <div class="card"><span class="eyebrow">Rwanda · EBM</span><b class="big">~5–6%</b><p>Average VAT increase among adopting firms, with effects up to around 16% for intensive users. Rwanda later added a consumer receipt lottery.</p><small>Lesson: electronic invoicing helps, but customer demand for receipts matters too.</small></div>
+        <div class="card"><span class="eyebrow">Kenya · eTIMS</span><b class="big">500,000+</b><p>Registrations by September 2025, about half the eventual target after a slower start. Kenya also cross-checks invoices with mobile money data.</p><small>Lesson: expect adoption friction; offline queues and mobile-money matching are essential.</small></div>
+      </div>
+      <p class="source">Source: TEOS proposal, benchmarking section. These figures are indicators, not forecasts for Tanzania.</p>
+    </section>
+
+    <div class="band"><div><span class="eyebrow" style="color:var(--y)">Try it</span><h2>See the evidence chain in practice</h2><p>Create a sample DBI and download a card with a QR code.</p></div><button class="btn light" type="button" onclick="go('dbi')">Open Business ID</button></div>
+  </section>
+
+  <section class="v" id="faq">
+    <div class="page-head">
+      <span class="eyebrow">FAQ</span>
+      <h1>Questions about TEOS</h1>
+      <p>Ten short answers about the proposal, the DBI and the safeguards. Together they give the overall picture of what TEOS is trying to change.</p>
+    </div>
+    <div class="faq-list">
+      <details open name="faq">
+        <summary><span class="qnum">01</span>What is TEOS?</summary>
+        <p>TEOS — the Tanzania Economic Operating System — is a proposed national digital layer that helps TRA see the economy through cross-verified evidence rather than taxpayer declarations alone. It connects a business identity, simple transaction capture, supplier records, bank and mobile-money flows, and customer confirmation. The aim is wider coverage, fairer assessment and better audit targeting, not simply more receipts.</p>
+      </details>
+      <details name="faq">
+        <summary><span class="qnum">02</span>What is a Digital Business Identity?</summary>
+        <p>A DBI is a unique digital identity for any economic actor, from a motorcycle-taxi rider or food vendor to a supermarket. It links a NIDA-verified owner, a phone number, a sector and a location to a QR-coded record. Every later transaction in TEOS is anchored to that identity, so the business builds a continuous transaction history.</p>
+      </details>
+      <details name="faq">
+        <summary><span class="qnum">03</span>Is a DBI the same as a TIN?</summary>
+        <p>No. A TIN is a taxpayer identification number. A DBI is broader: it can be issued to an operator who does not yet have full business registration, and it is linked to the TIN where one exists. The DBI is an entry point to visibility and formalisation, not a replacement for the TIN.</p>
+      </details>
+      <details name="faq">
+        <summary><span class="qnum">04</span>Who can get a DBI?</summary>
+        <p>Any business or self-employed person can use one: motorcycle-taxi riders, street vendors, food vendors, barbers, market traders, shops, restaurants, hotels, pharmacies, clinics, garages, farmers and larger companies. A basic DBI needs only a NIDA or TIN check, a business name, a phone number and an optional location — not full BRELA registration first.</p>
+      </details>
+      <details name="faq">
+        <summary><span class="qnum">05</span>How does TEOS know what a business actually earns?</summary>
+        <p>It compares multiple independent evidence streams: recorded sales or services, supplier deliveries, bank and mobile-money flows, and customer-confirmed QR receipts. No single source is treated as final. A mismatch — for example, declared sales that are far below supplier purchases — becomes a signal for review, not an automatic penalty.</p>
+      </details>
+      <details name="faq">
+        <summary><span class="qnum">06</span>Is TEOS just another e-invoicing system?</summary>
+        <p>No. Electronic invoicing is one input. TEOS adds a national business identity, sector-specific low-friction capture, offline-first hubs, USSD for basic phones, customer verification with rewards, AI-assisted risk scoring, a national dashboard and government integration. It is designed to reach the informal sector that receipt-only systems often miss.</p>
+      </details>
+      <details name="faq">
+        <summary><span class="qnum">07</span>How does AI-assisted risk scoring work, and can it punish me automatically?</summary>
+        <p>The AI produces a risk score that helps TRA prioritise which cases deserve human review; it does not issue penalties by itself. Before any assessment, the business is notified of the specific discrepancy and given a defined period to respond with evidence. A TRA officer reviews the case and records a reasoned decision. Any departure from the AI score is logged for audit, and the business can appeal.</p>
+      </details>
+      <details name="faq">
+        <summary><span class="qnum">08</span>Can TEOS work offline and on basic phones?</summary>
+        <p>Yes — that is a core design requirement. A low-cost Smart Business Hub can store transactions locally and sync when connectivity returns, so a network outage does not lose a sale. Basic phones can use USSD to record a sale, check today's total or retrieve a receipt number without mobile data.</p>
+      </details>
+      <details name="faq">
+        <summary><span class="qnum">09</span>Will TEOS create new taxes or penalties?</summary>
+        <p>The proposal does not introduce a new tax. Its first purpose is to widen visibility and make assessment more accurate and defensible. Implementation is phased over 24 months, with pilot regions and grace periods before enforcement. Any change to rates or thresholds remains a policy decision outside the system itself. If a business disagrees with an assessment, the human-review and appeal route applies.</p>
+      </details>
+      <details name="faq">
+        <summary><span class="qnum">10</span>How is my data protected, and how will success be measured?</summary>
+        <p>TEOS is designed around Tanzania's Personal Data Protection Act, 2022: lawful purpose, data minimisation, access controls, audit logs, encryption, retention rules and consent for optional customer reward data. Government integrations require formal data-sharing agreements and independent security audits before each rollout phase. Success is reviewed at the end of every phase against metrics such as DBI registration, receipt verification, audit precision, revenue impact, adoption and data-protection compliance.</p>
+      </details>
+    </div>
+    <div class="band"><div><span class="eyebrow" style="color:var(--y)">Next step</span><h2>Try the Business ID flow</h2><p>Create a sample DBI and see the card, QR code and download in action.</p></div><button class="btn light" type="button" onclick="go('dbi')">Open Business ID</button></div>
+  </section>
+
+</main>
+
+<footer>
+  <div>TEOS — Tanzania Economic Operating System. A proposal by Josephat John Athanas for the TRA Innovation Challenge 2026.</div>
+  <div>This site is a pilot demonstration. All records, figures and risk signals are illustrative.</div>
+</footer>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>var qrcode=function(){function i(t,r){function a(t,r){g=function(t){for(var r=new Array(t),e=0;e<t;e+=1){r[e]=new Array(t);for(var n=0;n<t;n+=1)r[e][n]=null}return r}(l=4*u+17),e(0,0),e(l-7,0),e(0,l-7),i(),o(),v(t,r),7<=u&&h(t),null==n&&(n=w(u,f,c)),d(n,r)}var u=t,f=y[r],g=null,l=0,n=null,c=[],s={},e=function(t,r){for(var e=-1;e<=7;e+=1)if(!(t+e<=-1||l<=t+e))for(var n=-1;n<=7;n+=1)r+n<=-1||l<=r+n||(g[t+e][r+n]=0<=e&&e<=6&&(0==n||6==n)||0<=n&&n<=6&&(0==e||6==e)||2<=e&&e<=4&&2<=n&&n<=4)},o=function(){for(var t=8;t<l-8;t+=1)null==g[t][6]&&(g[t][6]=t%2==0);for(var r=8;r<l-8;r+=1)null==g[6][r]&&(g[6][r]=r%2==0)},i=function(){for(var t=B.getPatternPosition(u),r=0;r<t.length;r+=1)for(var e=0;e<t.length;e+=1){var n=t[r],o=t[e];if(null==g[n][o])for(var i=-2;i<=2;i+=1)for(var a=-2;a<=2;a+=1)g[n+i][o+a]=-2==i||2==i||-2==a||2==a||0==i&&0==a}},h=function(t){for(var r=B.getBCHTypeNumber(u),e=0;e<18;e+=1){var n=!t&&1==(r>>e&1);g[Math.floor(e/3)][e%3+l-8-3]=n}for(e=0;e<18;e+=1){n=!t&&1==(r>>e&1);g[e%3+l-8-3][Math.floor(e/3)]=n}},v=function(t,r){for(var e=f<<3|r,n=B.getBCHTypeInfo(e),o=0;o<15;o+=1){var i=!t&&1==(n>>o&1);o<6?g[o][8]=i:o<8?g[o+1][8]=i:g[l-15+o][8]=i}for(o=0;o<15;o+=1){i=!t&&1==(n>>o&1);o<8?g[8][l-o-1]=i:o<9?g[8][15-o-1+1]=i:g[8][15-o-1]=i}g[l-8][8]=!t},d=function(t,r){for(var e=-1,n=l-1,o=7,i=0,a=B.getMaskFunction(r),u=l-1;0<u;u-=2)for(6==u&&(u-=1);;){for(var f=0;f<2;f+=1)if(null==g[n][u-f]){var c=!1;i<t.length&&(c=1==(t[i]>>>o&1)),a(n,u-f)&&(c=!c),g[n][u-f]=c,-1==(o-=1)&&(i+=1,o=7)}if((n+=e)<0||l<=n){n-=e,e=-e;break}}},w=function(t,r,e){for(var n=b.getRSBlocks(t,r),o=M(),i=0;i<e.length;i+=1){var a=e[i];o.put(a.getMode(),4),o.put(a.getLength(),B.getLengthInBits(a.getMode(),t)),a.write(o)}var u=0;for(i=0;i<n.length;i+=1)u+=n[i].dataCount;if(o.getLengthInBits()>8*u)throw"code length overflow. ("+o.getLengthInBits()+">"+8*u+")";for(o.getLengthInBits()+4<=8*u&&o.put(0,4);o.getLengthInBits()%8!=0;)o.putBit(!1);for(;!(o.getLengthInBits()>=8*u||(o.put(236,8),o.getLengthInBits()>=8*u));)o.put(17,8);return function(t,r){for(var e=0,n=0,o=0,i=new Array(r.length),a=new Array(r.length),u=0;u<r.length;u+=1){var f=r[u].dataCount,c=r[u].totalCount-f;n=Math.max(n,f),o=Math.max(o,c),i[u]=new Array(f);for(var g=0;g<i[u].length;g+=1)i[u][g]=255&t.getBuffer()[g+e];e+=f;var l=B.getErrorCorrectPolynomial(c),h=C(i[u],l.getLength()-1).mod(l);a[u]=new Array(l.getLength()-1);for(g=0;g<a[u].length;g+=1){var s=g+h.getLength()-a[u].length;a[u][g]=0<=s?h.getAt(s):0}}var v=0;for(g=0;g<r.length;g+=1)v+=r[g].totalCount;var d=new Array(v),w=0;for(g=0;g<n;g+=1)for(u=0;u<r.length;u+=1)g<i[u].length&&(d[w]=i[u][g],w+=1);for(g=0;g<o;g+=1)for(u=0;u<r.length;u+=1)g<a[u].length&&(d[w]=a[u][g],w+=1);return d}(o,n)};s.addData=function(t,r){var e=null;switch(r=r||"Byte"){case"Numeric":e=x(t);break;case"Alphanumeric":e=m(t);break;case"Byte":e=L(t);break;case"Kanji":e=D(t);break;default:throw"mode:"+r}c.push(e),n=null},s.isDark=function(t,r){if(t<0||l<=t||r<0||l<=r)throw t+","+r;return g[t][r]},s.getModuleCount=function(){return l},s.make=function(){if(u<1){for(var t=1;t<40;t++){for(var r=b.getRSBlocks(t,f),e=M(),n=0;n<c.length;n++){var o=c[n];e.put(o.getMode(),4),e.put(o.getLength(),B.getLengthInBits(o.getMode(),t)),o.write(e)}var i=0;for(n=0;n<r.length;n++)i+=r[n].dataCount;if(e.getLengthInBits()<=8*i)break}u=t}a(!1,function(){for(var t=0,r=0,e=0;e<8;e+=1){a(!0,e);var n=B.getLostPoint(s);(0==e||n<t)&&(t=n,r=e)}return r}())},s.createTableTag=function(t,r){t=t||2;var e="";e+='<table style="',e+=" border-width: 0px; border-style: none;",e+=" border-collapse: collapse;",e+=" padding: 0px; margin: "+(r=void 0===r?4*t:r)+"px;",e+='">',e+="<tbody>";for(var n=0;n<s.getModuleCount();n+=1){e+="<tr>";for(var o=0;o<s.getModuleCount();o+=1)e+='<td style="',e+=" border-width: 0px; border-style: none;",e+=" border-collapse: collapse;",e+=" padding: 0px; margin: 0px;",e+=" width: "+t+"px;",e+=" height: "+t+"px;",e+=" background-color: ",e+=s.isDark(n,o)?"#000000":"#ffffff",e+=";",e+='"/>';e+="</tr>"}return e+="</tbody>",e+="</table>"},s.createSvgTag=function(t,r,e,n){var o={};"object"==typeof t&&(t=(o=t).cellSize,r=o.margin,e=o.alt,n=o.title),t=t||2,r=void 0===r?4*t:r,(e="string"==typeof e?{text:e}:e||{}).text=e.text||null,e.id=e.text?e.id||"qrcode-description":null,(n="string"==typeof n?{text:n}:n||{}).text=n.text||null,n.id=n.text?n.id||"qrcode-title":null;var i,a,u,f,c=s.getModuleCount()*t+2*r,g="";for(f="l"+t+",0 0,"+t+" -"+t+",0 0,-"+t+"z ",g+='<svg version="1.1" xmlns="http://www.w3.org/2000/svg"',g+=o.scalable?"":' width="'+c+'px" height="'+c+'px"',g+=' viewBox="0 0 '+c+" "+c+'" ',g+=' preserveAspectRatio="xMinYMin meet"',g+=n.text||e.text?' role="img" aria-labelledby="'+p([n.id,e.id].join(" ").trim())+'"':"",g+=">",g+=n.text?'<title id="'+p(n.id)+'">'+p(n.text)+"</title>":"",g+=e.text?'<description id="'+p(e.id)+'">'+p(e.text)+"</description>":"",g+='<rect width="100%" height="100%" fill="white" cx="0" cy="0"/>',g+='<path d="',a=0;a<s.getModuleCount();a+=1)for(u=a*t+r,i=0;i<s.getModuleCount();i+=1)s.isDark(a,i)&&(g+="M"+(i*t+r)+","+u+f);return g+='" stroke="transparent" fill="black"/>',g+="</svg>"},s.createDataURL=function(o,t){o=o||2,t=void 0===t?4*o:t;var r=s.getModuleCount()*o+2*t,i=t,a=r-t;return I(r,r,function(t,r){if(i<=t&&t<a&&i<=r&&r<a){var e=Math.floor((t-i)/o),n=Math.floor((r-i)/o);return s.isDark(n,e)?0:1}return 1})},s.createImgTag=function(t,r,e){t=t||2,r=void 0===r?4*t:r;var n=s.getModuleCount()*t+2*r,o="";return o+="<img",o+=' src="',o+=s.createDataURL(t,r),o+='"',o+=' width="',o+=n,o+='"',o+=' height="',o+=n,o+='"',e&&(o+=' alt="',o+=p(e),o+='"'),o+="/>"};var p=function(t){for(var r="",e=0;e<t.length;e+=1){var n=t.charAt(e);switch(n){case"<":r+="&lt;";break;case">":r+="&gt;";break;case"&":r+="&amp;";break;case'"':r+="&quot;";break;default:r+=n}}return r};return s.createASCII=function(t,r){if((t=t||1)<2)return function(t){t=void 0===t?2:t;var r,e,n,o,i,a=1*s.getModuleCount()+2*t,u=t,f=a-t,c={"██":"█","█ ":"▀"," █":"▄","  ":" "},g={"██":"▀","█ ":"▀"," █":" ","  ":" "},l="";for(r=0;r<a;r+=2){for(n=Math.floor((r-u)/1),o=Math.floor((r+1-u)/1),e=0;e<a;e+=1)i="█",u<=e&&e<f&&u<=r&&r<f&&s.isDark(n,Math.floor((e-u)/1))&&(i=" "),u<=e&&e<f&&u<=r+1&&r+1<f&&s.isDark(o,Math.floor((e-u)/1))?i+=" ":i+="█",l+=t<1&&f<=r+1?g[i]:c[i];l+="\n"}return a%2&&0<t?l.substring(0,l.length-a-1)+Array(1+a).join("▀"):l.substring(0,l.length-1)}(r);t-=1,r=void 0===r?2*t:r;var e,n,o,i,a=s.getModuleCount()*t+2*r,u=r,f=a-r,c=Array(t+1).join("██"),g=Array(t+1).join("  "),l="",h="";for(e=0;e<a;e+=1){for(o=Math.floor((e-u)/t),h="",n=0;n<a;n+=1)i=1,u<=n&&n<f&&u<=e&&e<f&&s.isDark(o,Math.floor((n-u)/t))&&(i=0),h+=i?c:g;for(o=0;o<t;o+=1)l+=h+"\n"}return l.substring(0,l.length-1)},s.renderTo2dContext=function(t,r){r=r||2;for(var e=s.getModuleCount(),n=0;n<e;n++)for(var o=0;o<e;o++)t.fillStyle=s.isDark(n,o)?"black":"white",t.fillRect(n*r,o*r,r,r)},s}i.stringToBytes=(i.stringToBytesFuncs={default:function(t){for(var r=[],e=0;e<t.length;e+=1){var n=t.charCodeAt(e);r.push(255&n)}return r}}).default,i.createStringToBytes=function(u,f){var i=function(){function t(){var t=r.read();if(-1==t)throw"eof";return t}for(var r=S(u),e=0,n={};;){var o=r.read();if(-1==o)break;var i=t(),a=t()<<8|t();n[String.fromCharCode(o<<8|i)]=a,e+=1}if(e!=f)throw e+" != "+f;return n}(),a="?".charCodeAt(0);return function(t){for(var r=[],e=0;e<t.length;e+=1){var n=t.charCodeAt(e);if(n<128)r.push(n);else{var o=i[t.charAt(e)];"number"==typeof o?(255&o)==o?r.push(o):(r.push(o>>>8),r.push(255&o)):r.push(a)}}return r}};var r,t,a=1,u=2,o=4,f=8,y={L:1,M:0,Q:3,H:2},e=0,n=1,c=2,g=3,l=4,h=5,s=6,v=7,B=(r=[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]],(t={}).getBCHTypeInfo=function(t){for(var r=t<<10;0<=d(r)-d(1335);)r^=1335<<d(r)-d(1335);return 21522^(t<<10|r)},t.getBCHTypeNumber=function(t){for(var r=t<<12;0<=d(r)-d(7973);)r^=7973<<d(r)-d(7973);return t<<12|r},t.getPatternPosition=function(t){return r[t-1]},t.getMaskFunction=function(t){switch(t){case e:return function(t,r){return(t+r)%2==0};case n:return function(t,r){return t%2==0};case c:return function(t,r){return r%3==0};case g:return function(t,r){return(t+r)%3==0};case l:return function(t,r){return(Math.floor(t/2)+Math.floor(r/3))%2==0};case h:return function(t,r){return t*r%2+t*r%3==0};case s:return function(t,r){return(t*r%2+t*r%3)%2==0};case v:return function(t,r){return(t*r%3+(t+r)%2)%2==0};default:throw"bad maskPattern:"+t}},t.getErrorCorrectPolynomial=function(t){for(var r=C([1],0),e=0;e<t;e+=1)r=r.multiply(C([1,w.gexp(e)],0));return r},t.getLengthInBits=function(t,r){if(1<=r&&r<10)switch(t){case a:return 10;case u:return 9;case o:case f:return 8;default:throw"mode:"+t}else if(r<27)switch(t){case a:return 12;case u:return 11;case o:return 16;case f:return 10;default:throw"mode:"+t}else{if(!(r<41))throw"type:"+r;switch(t){case a:return 14;case u:return 13;case o:return 16;case f:return 12;default:throw"mode:"+t}}},t.getLostPoint=function(t){for(var r=t.getModuleCount(),e=0,n=0;n<r;n+=1)for(var o=0;o<r;o+=1){for(var i=0,a=t.isDark(n,o),u=-1;u<=1;u+=1)if(!(n+u<0||r<=n+u))for(var f=-1;f<=1;f+=1)o+f<0||r<=o+f||0==u&&0==f||a==t.isDark(n+u,o+f)&&(i+=1);5<i&&(e+=3+i-5)}for(n=0;n<r-1;n+=1)for(o=0;o<r-1;o+=1){var c=0;t.isDark(n,o)&&(c+=1),t.isDark(n+1,o)&&(c+=1),t.isDark(n,o+1)&&(c+=1),t.isDark(n+1,o+1)&&(c+=1),0!=c&&4!=c||(e+=3)}for(n=0;n<r;n+=1)for(o=0;o<r-6;o+=1)t.isDark(n,o)&&!t.isDark(n,o+1)&&t.isDark(n,o+2)&&t.isDark(n,o+3)&&t.isDark(n,o+4)&&!t.isDark(n,o+5)&&t.isDark(n,o+6)&&(e+=40);for(o=0;o<r;o+=1)for(n=0;n<r-6;n+=1)t.isDark(n,o)&&!t.isDark(n+1,o)&&t.isDark(n+2,o)&&t.isDark(n+3,o)&&t.isDark(n+4,o)&&!t.isDark(n+5,o)&&t.isDark(n+6,o)&&(e+=40);var g=0;for(o=0;o<r;o+=1)for(n=0;n<r;n+=1)t.isDark(n,o)&&(g+=1);return e+=Math.abs(100*g/r/r-50)/5*10},t);function d(t){for(var r=0;0!=t;)r+=1,t>>>=1;return r}var w=function(){for(var r=new Array(256),e=new Array(256),t=0;t<8;t+=1)r[t]=1<<t;for(t=8;t<256;t+=1)r[t]=r[t-4]^r[t-5]^r[t-6]^r[t-8];for(t=0;t<255;t+=1)e[r[t]]=t;var n={glog:function(t){if(t<1)throw"glog("+t+")";return e[t]},gexp:function(t){for(;t<0;)t+=255;for(;256<=t;)t-=255;return r[t]}};return n}();function C(n,o){if(void 0===n.length)throw n.length+"/"+o;var r=function(){for(var t=0;t<n.length&&0==n[t];)t+=1;for(var r=new Array(n.length-t+o),e=0;e<n.length-t;e+=1)r[e]=n[e+t];return r}(),i={getAt:function(t){return r[t]},getLength:function(){return r.length},multiply:function(t){for(var r=new Array(i.getLength()+t.getLength()-1),e=0;e<i.getLength();e+=1)for(var n=0;n<t.getLength();n+=1)r[e+n]^=w.gexp(w.glog(i.getAt(e))+w.glog(t.getAt(n)));return C(r,0)},mod:function(t){if(i.getLength()-t.getLength()<0)return i;for(var r=w.glog(i.getAt(0))-w.glog(t.getAt(0)),e=new Array(i.getLength()),n=0;n<i.getLength();n+=1)e[n]=i.getAt(n);for(n=0;n<t.getLength();n+=1)e[n]^=w.gexp(w.glog(t.getAt(n))+r);return C(e,0).mod(t)}};return i}function p(){var e=[],o={writeByte:function(t){e.push(255&t)},writeShort:function(t){o.writeByte(t),o.writeByte(t>>>8)},writeBytes:function(t,r,e){r=r||0,e=e||t.length;for(var n=0;n<e;n+=1)o.writeByte(t[n+r])},writeString:function(t){for(var r=0;r<t.length;r+=1)o.writeByte(t.charCodeAt(r))},toByteArray:function(){return e},toString:function(){var t="";t+="[";for(var r=0;r<e.length;r+=1)0<r&&(t+=","),t+=e[r];return t+="]"}};return o}var k,A,b=(k=[[1,26,19],[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16],[4,101,81],[1,80,50,4,81,51],[4,50,22,4,51,23],[3,36,12,8,37,13],[2,116,92,2,117,93],[6,58,36,2,59,37],[4,46,20,6,47,21],[7,42,14,4,43,15],[4,133,107],[8,59,37,1,60,38],[8,44,20,4,45,21],[12,33,11,4,34,12],[3,145,115,1,146,116],[4,64,40,5,65,41],[11,36,16,5,37,17],[11,36,12,5,37,13],[5,109,87,1,110,88],[5,65,41,5,66,42],[5,54,24,7,55,25],[11,36,12,7,37,13],[5,122,98,1,123,99],[7,73,45,3,74,46],[15,43,19,2,44,20],[3,45,15,13,46,16],[1,135,107,5,136,108],[10,74,46,1,75,47],[1,50,22,15,51,23],[2,42,14,17,43,15],[5,150,120,1,151,121],[9,69,43,4,70,44],[17,50,22,1,51,23],[2,42,14,19,43,15],[3,141,113,4,142,114],[3,70,44,11,71,45],[17,47,21,4,48,22],[9,39,13,16,40,14],[3,135,107,5,136,108],[3,67,41,13,68,42],[15,54,24,5,55,25],[15,43,15,10,44,16],[4,144,116,4,145,117],[17,68,42],[17,50,22,6,51,23],[19,46,16,6,47,17],[2,139,111,7,140,112],[17,74,46],[7,54,24,16,55,25],[34,37,13],[4,151,121,5,152,122],[4,75,47,14,76,48],[11,54,24,14,55,25],[16,45,15,14,46,16],[6,147,117,4,148,118],[6,73,45,14,74,46],[11,54,24,16,55,25],[30,46,16,2,47,17],[8,132,106,4,133,107],[8,75,47,13,76,48],[7,54,24,22,55,25],[22,45,15,13,46,16],[10,142,114,2,143,115],[19,74,46,4,75,47],[28,50,22,6,51,23],[33,46,16,4,47,17],[8,152,122,4,153,123],[22,73,45,3,74,46],[8,53,23,26,54,24],[12,45,15,28,46,16],[3,147,117,10,148,118],[3,73,45,23,74,46],[4,54,24,31,55,25],[11,45,15,31,46,16],[7,146,116,7,147,117],[21,73,45,7,74,46],[1,53,23,37,54,24],[19,45,15,26,46,16],[5,145,115,10,146,116],[19,75,47,10,76,48],[15,54,24,25,55,25],[23,45,15,25,46,16],[13,145,115,3,146,116],[2,74,46,29,75,47],[42,54,24,1,55,25],[23,45,15,28,46,16],[17,145,115],[10,74,46,23,75,47],[10,54,24,35,55,25],[19,45,15,35,46,16],[17,145,115,1,146,116],[14,74,46,21,75,47],[29,54,24,19,55,25],[11,45,15,46,46,16],[13,145,115,6,146,116],[14,74,46,23,75,47],[44,54,24,7,55,25],[59,46,16,1,47,17],[12,151,121,7,152,122],[12,75,47,26,76,48],[39,54,24,14,55,25],[22,45,15,41,46,16],[6,151,121,14,152,122],[6,75,47,34,76,48],[46,54,24,10,55,25],[2,45,15,64,46,16],[17,152,122,4,153,123],[29,74,46,14,75,47],[49,54,24,10,55,25],[24,45,15,46,46,16],[4,152,122,18,153,123],[13,74,46,32,75,47],[48,54,24,14,55,25],[42,45,15,32,46,16],[20,147,117,4,148,118],[40,75,47,7,76,48],[43,54,24,22,55,25],[10,45,15,67,46,16],[19,148,118,6,149,119],[18,75,47,31,76,48],[34,54,24,34,55,25],[20,45,15,61,46,16]],(A={}).getRSBlocks=function(t,r){var e=function(t,r){switch(r){case y.L:return k[4*(t-1)+0];case y.M:return k[4*(t-1)+1];case y.Q:return k[4*(t-1)+2];case y.H:return k[4*(t-1)+3];default:return}}(t,r);if(void 0===e)throw"bad rs block @ typeNumber:"+t+"/errorCorrectionLevel:"+r;for(var n,o,i=e.length/3,a=[],u=0;u<i;u+=1)for(var f=e[3*u+0],c=e[3*u+1],g=e[3*u+2],l=0;l<f;l+=1)a.push((n=g,o=void 0,(o={}).totalCount=c,o.dataCount=n,o));return a},A),M=function(){var e=[],n=0,o={getBuffer:function(){return e},getAt:function(t){var r=Math.floor(t/8);return 1==(e[r]>>>7-t%8&1)},put:function(t,r){for(var e=0;e<r;e+=1)o.putBit(1==(t>>>r-e-1&1))},getLengthInBits:function(){return n},putBit:function(t){var r=Math.floor(n/8);e.length<=r&&e.push(0),t&&(e[r]|=128>>>n%8),n+=1}};return o},x=function(t){var r=a,n=t,e={getMode:function(){return r},getLength:function(t){return n.length},write:function(t){for(var r=n,e=0;e+2<r.length;)t.put(o(r.substring(e,e+3)),10),e+=3;e<r.length&&(r.length-e==1?t.put(o(r.substring(e,e+1)),4):r.length-e==2&&t.put(o(r.substring(e,e+2)),7))}},o=function(t){for(var r=0,e=0;e<t.length;e+=1)r=10*r+i(t.charAt(e));return r},i=function(t){if("0"<=t&&t<="9")return t.charCodeAt(0)-"0".charCodeAt(0);throw"illegal char :"+t};return e},m=function(t){var r=u,n=t,e={getMode:function(){return r},getLength:function(t){return n.length},write:function(t){for(var r=n,e=0;e+1<r.length;)t.put(45*o(r.charAt(e))+o(r.charAt(e+1)),11),e+=2;e<r.length&&t.put(o(r.charAt(e)),6)}},o=function(t){if("0"<=t&&t<="9")return t.charCodeAt(0)-"0".charCodeAt(0);if("A"<=t&&t<="Z")return t.charCodeAt(0)-"A".charCodeAt(0)+10;switch(t){case" ":return 36;case"$":return 37;case"%":return 38;case"*":return 39;case"+":return 40;case"-":return 41;case".":return 42;case"/":return 43;case":":return 44;default:throw"illegal char :"+t}};return e},L=function(t){var r=o,e=i.stringToBytes(t),n={getMode:function(){return r},getLength:function(t){return e.length},write:function(t){for(var r=0;r<e.length;r+=1)t.put(e[r],8)}};return n},D=function(t){var r=f,e=i.stringToBytesFuncs.SJIS;if(!e)throw"sjis not supported.";!function(){var t=e("友");if(2!=t.length||38726!=(t[0]<<8|t[1]))throw"sjis not supported."}();var o=e(t),n={getMode:function(){return r},getLength:function(t){return~~(o.length/2)},write:function(t){for(var r=o,e=0;e+1<r.length;){var n=(255&r[e])<<8|255&r[e+1];if(33088<=n&&n<=40956)n-=33088;else{if(!(57408<=n&&n<=60351))throw"illegal char at "+(e+1)+"/"+n;n-=49472}n=192*(n>>>8&255)+(255&n),t.put(n,13),e+=2}if(e<r.length)throw"illegal char at "+(e+1)}};return n},S=function(t){var e=t,n=0,o=0,i=0,r={read:function(){for(;i<8;){if(n>=e.length){if(0==i)return-1;throw"unexpected end of file./"+i}var t=e.charAt(n);if(n+=1,"="==t)return i=0,-1;t.match(/^\s$/)||(o=o<<6|a(t.charCodeAt(0)),i+=6)}var r=o>>>i-8&255;return i-=8,r}},a=function(t){if(65<=t&&t<=90)return t-65;if(97<=t&&t<=122)return t-97+26;if(48<=t&&t<=57)return t-48+52;if(43==t)return 62;if(47==t)return 63;throw"c:"+t};return r},I=function(t,r,e){for(var n=function(t,r){var n=t,o=r,l=new Array(t*r),e={setPixel:function(t,r,e){l[r*n+t]=e},write:function(t){t.writeString("GIF87a"),t.writeShort(n),t.writeShort(o),t.writeByte(128),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(255),t.writeByte(255),t.writeByte(255),t.writeString(","),t.writeShort(0),t.writeShort(0),t.writeShort(n),t.writeShort(o),t.writeByte(0);var r=i(2);t.writeByte(2);for(var e=0;255<r.length-e;)t.writeByte(255),t.writeBytes(r,e,255),e+=255;t.writeByte(r.length-e),t.writeBytes(r,e,r.length-e),t.writeByte(0),t.writeString(";")}},i=function(t){for(var r=1<<t,e=1+(1<<t),n=t+1,o=h(),i=0;i<r;i+=1)o.add(String.fromCharCode(i));o.add(String.fromCharCode(r)),o.add(String.fromCharCode(e));var a=p(),u=function(t){var e=t,n=0,o=0,r={write:function(t,r){if(t>>>r!=0)throw"length over";for(;8<=n+r;)e.writeByte(255&(t<<n|o)),r-=8-n,t>>>=8-n,n=o=0;o|=t<<n,n+=r},flush:function(){0<n&&e.writeByte(o)}};return r}(a);u.write(r,n);var f=0,c=String.fromCharCode(l[f]);for(f+=1;f<l.length;){var g=String.fromCharCode(l[f]);f+=1,o.contains(c+g)?c+=g:(u.write(o.indexOf(c),n),o.size()<4095&&(o.size()==1<<n&&(n+=1),o.add(c+g)),c=g)}return u.write(o.indexOf(c),n),u.write(e,n),u.flush(),a.toByteArray()},h=function(){var r={},e=0,n={add:function(t){if(n.contains(t))throw"dup key:"+t;r[t]=e,e+=1},size:function(){return e},indexOf:function(t){return r[t]},contains:function(t){return void 0!==r[t]}};return n};return e}(t,r),o=0;o<r;o+=1)for(var i=0;i<t;i+=1)n.setPixel(i,o,e(i,o));var a=p();n.write(a);for(var u=function(){function e(t){a+=String.fromCharCode(r(63&t))}var n=0,o=0,i=0,a="",t={},r=function(t){if(t<0);else{if(t<26)return 65+t;if(t<52)return t-26+97;if(t<62)return t-52+48;if(62==t)return 43;if(63==t)return 47}throw"n:"+t};return t.writeByte=function(t){for(n=n<<8|255&t,o+=8,i+=1;6<=o;)e(n>>>o-6),o-=6},t.flush=function(){if(0<o&&(e(n<<6-o),o=n=0),i%3!=0)for(var t=3-i%3,r=0;r<t;r+=1)a+="="},t.toString=function(){return a},t}(),f=a.toByteArray(),c=0;c<f.length;c+=1)u.writeByte(f[c]);return u.flush(),"data:image/gif;base64,"+u};return i}();qrcode.stringToBytesFuncs["UTF-8"]=function(t){return function(t){for(var r=[],e=0;e<t.length;e++){var n=t.charCodeAt(e);n<128?r.push(n):n<2048?r.push(192|n>>6,128|63&n):n<55296||57344<=n?r.push(224|n>>12,128|n>>6&63,128|63&n):(e++,n=65536+((1023&n)<<10|1023&t.charCodeAt(e)),r.push(240|n>>18,128|n>>12&63,128|n>>6&63,128|63&n))}return r}(t)},function(t){"function"==typeof define&&define.amd?define([],t):"object"==typeof exports&&(module.exports=t())}(function(){return qrcode});</script>
+<script>
+const LOGO='data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNi4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iMjc0cHgiIGhlaWdodD0iMjkwcHgiIHZpZXdCb3g9IjAgMCAyNzQgMjkwIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAyNzQgMjkwIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxnPg0KCTxwYXRoIGQ9Ik0xNzAuMjc1LDBjMCwwLTEuOTI1LDIuMDgtMi41OTgsMy42MzhjLTAuODM4LDEuOTQtMC42MjMsNi4zODMtMC42MjMsNi4zODNsNjIuNzgzLDUyLjA0OWwtNy41MTMsMTAyLjg1NGwtNTcuMTQ3LDI0LjY4NA0KCQljMCwwLTI4Ljk3OSwxMS4yNzEtMjguOTc5LDI4LjM1MWMwLDAtMS45NjksMjkuNTE0LDM4LjkwMyw0OS44MTRjMTMuODY2LTE5LjMxNCwxNC4zMTMtMjAuMTIsMTQuMzEzLTIwLjEyDQoJCXMtMTAuMjg2LTIyLjAwNC0xMC44MjUtMjQuMzI5Yy0wLjUzNS0yLjMyNS01LjgxMy0xMC42NDYsNy43ODEtMTYuNDU4YzEzLjU5NC01LjgxMiw1Ni45NzEtMjQuMDU3LDU2Ljk3MS0yNC4wNTdsNy45NjEtMTIzLjk1Mw0KCQlMMTcwLjI3NSwweiIvPg0KCTxwYXRoIGQ9Ik0xMDIuNDM1LDBjMCwwLDEuOTI2LDIuMDgsMi41OTIsMy42MzhjMC44NDIsMS45NCwwLjYyOSw2LjM4MywwLjYyOSw2LjM4M0w0Mi44NzEsNjIuMDY5bDcuNTE1LDEwMi44NTRsNTcuMTQ4LDI0LjY4NA0KCQljMCwwLDI4Ljk3OSwxMS4yNzEsMjguOTc5LDI4LjM1MWMwLDAsMS45NjgsMjkuNTE0LTM4LjkwMyw0OS44MTRjLTEzLjg2Ni0xOS4zMTQtMTQuMzEzLTIwLjEyLTE0LjMxMy0yMC4xMg0KCQlzMTAuMjg3LTIyLjAwNCwxMC44MjYtMjQuMzI5YzAuNTMzLTIuMzI1LDUuODA3LTEwLjY0Ni03Ljc4Mi0xNi40NThjLTEzLjU5OC01LjgxMi01Ni45NzEtMjQuMDU3LTU2Ljk3MS0yNC4wNTdMMjEuNDA2LDU4Ljg1NA0KCQlMMTAyLjQzNSwweiIvPg0KCTxwYXRoIGQ9Ik0xNTQuODI2LDE5MS41OTJjLTEuNzUtMS4yMDctMy4wNDctMy4zNzYtMy43MTMtNi4wMTdjLTAuNjcyLTIuNjM1LDAtMy44NDQsMC43NTgtNC42NDkNCgkJYzAuNzYzLTAuNzk5LDEuMTE5LTIuNDExLDEuNTY3LTQuNTExYzAuNDQyLTIuMTA4LDAuMzU4LTYuMDM3LTAuMDg5LTcuMDY3Yy0wLjQ0OS0xLjAyOS0xLjAyOS0xLjc0NC0xLjQzMS0yLjcyOQ0KCQljLTAuNDA0LTAuOTgxLDAuMDg1LTUuMjMyLTAuMDkxLTcuMTk5Yy0wLjE4Mi0xLjk2OSwwLjIyNS0xLjk2OSwwLjQtMy45NzljMC4xODItMi4wMTItMC4zNTctMi4wNTgtMC41ODItMy4wNA0KCQljMC4wNDktMS44MzMtMS4zODUtNC42NS0yLjI3NS01Ljc3MWMtMC44OTYtMS4xMTMtMy42Ny0yLjE0OS01LjM3MS0zLjM1NGMtMS42OTUtMS4yMDctMi4xMDItMy4xMzEtMi4xMDItMy45NzkNCgkJYy0wLjEzNC0xLjc5LDAuMDktMi40NTcsMS4yOTctMi43MjljMS4yMTEtMC4yNjksMC44MDUtMS42NTQsMC44MDUtMi45MDdjMC0xLjI1NCwxLjAyOS0xLjk2OSwyLjczLTMuMzA4DQoJCWMxLjY5NS0xLjM0NCw1LjM2NC0zLjgwMiw3LjAxOS00Ljk2NWMxLjQzNS0xLjIwNSwwLjMxMy0yLjUwNy0wLjMxMS0zLjE3M2MtMC42MjktMC42NzMsMC4xMzQtMC44OTYsMS4xNjMtMS4zNDQNCgkJczAuMjI1LTEuNy0wLjYyOS0xLjc4N2MtMS40MjktMC4xODItMi4wMTEtMS41MjUtMi42ODQtMy4wODhjLTEuNzg1LTMuMjIxLTQuMjkyLTMuMTMtNy42ODktMy4wMzkNCgkJYy0xLjgzNSwwLjA0OC0zLjIyMS0wLjUwMi0zLjYzNy0xLjE0MmMtMC41OTgtMC45MTctMC43NDEtMi44NDktMC42NDUtMy41MzljMC4wOC0wLjYzMSwwLTIuNTYzLDAtMi41NjNsMC4wMzEtNTQuNzI2DQoJCWMwLTEuNjMxLDEuMDc4LTIuMTQ4LDIuMDUzLTIuMTQ4bDAuMjcxLTAuMDEyaDQ4LjcwMWwtMy42MjEtNC42NWgtNDUuNjg4Yy0xLjEyNi0wLjA0MS0yLjAyMS0wLjk0NC0yLjA1My0yLjA3NXYtNC44NDcNCgkJYzAtMC41MDItMC4wMDYtMC43MDksMC40NDItMS4yMTdoLTAuMDA1YzAuNzMtMC43OTksMS4xNzktMS44NjYsMS4xNzktMy4wMzNjMC0yLjUwMi0yLjAyOC00LjUyOC00LjUyOS00LjUyOA0KCQljLTIuNSwwLTQuNTI2LDIuMDI2LTQuNTI2LDQuNTI4YzAsMS4yMjEsMC40NzksMi4zMjQsMS4yNjksMy4xNDFjMC4zNTEsMC40MjksMC4zNDYsMC42NDYsMC4zNDYsMS4xMDl2My4xNjhsLTAuMDMxLDEuNjINCgkJYzAsMS4xNTMtMC45MTcsMi4wOTMtMi4wNiwyLjEzNEg4Ni40OTVsLTQuMTYsNC42NTZoNDguMjA1djAuMDA2aDAuNDY5YzEuMTksMCwyLjE1LDAuOTU5LDIuMTUsMi4xNDh2MC43NTINCgkJYzAsMCwwLjAyMSw1MS4xMzIsMC4wMjEsNTMuOTc0YzAsMy4zMDgtMC4zODMsMy4yMzItMS42OCw1LjI0NGMtMS4yOTYsMi4wMTUtMy42NDIsMS44MTctNC4yNjYsMS4zNzYNCgkJYy0xLjUyLTEuMzg5LTMuMDQsMC4yNjYtMy40NDQsMC43OThjLTAuNDAxLDAuNTM5LTEuMDI5LDEuNjExLTEuMDI5LDEuNjExcy0xLjc3NiwyLjQ2My0yLjc0NywzLjAyOA0KCQljLTAuOTc3LDAuNTcxLTEuODc3LDAuNDM5LTMuMjUyLDAuMjAzYy0xLjM3Ni0wLjIzMy0xLjgxNCwwLjUzOS0xLjU3OSwwLjkzOGMwLjIzNSwwLjQwNiwxLjM0NCwwLjMzOCwxLjQ3OCwwLjgwNg0KCQljMC4xMzMsMC40NjktMC45NzcsMC44NzYtMS4yMSwxLjM3NmMtMC42MDQsMC45NzEtMC4xOTksMS44MTQsMC40NjgsMS45MTVjMC42NzMsMC4wOTYsOC4xNTUsNi4xMzMsOS4xOTUsNy42MTENCgkJYzEuMDQxLDEuNDc2LDEuMTM1LDIuMzQ1LDAuMzMxLDMuMzg1Yy0wLjc5OSwxLjAzOS0wLjczNSwzLjYyNi0wLjkwMiw1LjA2N2MtMC4xNjksMS40MzgtMC41MzgsMi40MTYtMS4wMDcsMy4xMg0KCQljLTAuNDcsMC43MDItNC4zMjcsMy4zNTQtNS4zOTcsNC4xNTljLTEuMDc4LDAuODA2LTEuMTMxLDEuNzIyLTEuMTEsMi4wMTFjMC4wODEsMC45NjUsMC4xNTUsMi4wOTUtMC4xNDcsMy4xNjcNCgkJYy0wLjI5OSwxLjA3Ni0wLjU4MiwxLjk2My0wLjM5LDMuMTA0YzAuMjcyLDEuNTk5LDAuMDU5LDMuNTczLTAuMTEyLDQuODJjLTAuMTY2LDEuMjEtMC4xODgsNS42MTEtMC4xODgsNy4xMg0KCQljMCwxLjUxLDAuMTY3LDIuODE0LDAuNjY3LDQuMTIzYzAuNTA3LDEuMzEsMC41MDcsMi40ODQsMC41NzIsNS40MDFjMC4wNjksMi45MTcsMC4zMDQsNy4yNDEsMC42NCw3Ljc0Nw0KCQljMC40MzcsMC43OTksMS4yNzUsMi43MTUsMC41MzksNC43MjdjLTAuNzQyLDIuMDE2LTQuOTY0LDQuMjkyLTkuMzI3LDYuMjRjLTQuMzU4LDEuOTQ2LTUuMTYzLDUuNDk2LTIuNzQ3LDQuOTY1DQoJCWM0Ljg5Ni0wLjgwNiwxOC40MzEtMi4wOTIsMjAuMjQ1LTEuNzU1YzEuODA3LDAuMzM1LDExLjc2NywwLjUwMSwxNy4wNjQsMC4xMDJjNS4zMDEtMC40MDIsMjYuMDEsMC43MTUsMjQuODY3LTAuMjI1DQoJCUMxNjcuNTY2LDE5Ni45NTUsMTU2LjU3LDE5Mi44MDMsMTU0LjgyNiwxOTEuNTkyeiIvPg0KCTxnPg0KCQk8cGF0aCBmaWxsPSIjRkNFRTFGIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBkPSJNMzYuNzE4LDI1OS41Ii8+DQoJCTxnPg0KCQkJPHBhdGggZmlsbD0iI0ZDRUUxRiIgZD0iTTI3MC41MDMsMjUzLjg3YzAsMC4yOTMtMC4yNDEsMC41MzMtMC41NCwwLjUzM2wtNjYuMDc0LDE5LjkyOGMtMC4yOTksMC0wLjUzOS0wLjIzOS0wLjUzOS0wLjUzOFYyMTQuMjMNCgkJCQljMC0wLjI5MywwLjI0LTAuNTM0LDAuNTM5LTAuNTM0bDY3LjAxNC0zMC45MzFjMC4yOTksMCwwLjUzOSwwLjIzOSwwLjUzOSwwLjUzN2wtMTkuOTk0LDQ4LjgzTDI3MC41MDMsMjUzLjg3eiIvPg0KCQkJPHBhdGggZD0iTTIwNC4xMjMsMjc1Ljk0MWgtMC4yMzRjLTEuMTg1LDAtMi4xNDgtMC45NjQtMi4xNDgtMi4xNDhWMjE0LjIzYzAtMS4wMjUsMC43MjUtMS44ODMsMS42ODYtMi4wOThsNjcuMTI1LTMwLjk3OWgwLjM1Mg0KCQkJCWMxLjE4NSwwLDIuMTQ0LDAuOTY3LDIuMTQ0LDIuMTQ5djAuMzE0bC0xOS43MjYsNDguMjA1bDE4Ljc4NywyMS40Mzl2MC42MDhjMCwxLjA3Ni0wLjc5NCwxLjk2OC0xLjgzLDIuMTIyTDIwNC4xMjMsMjc1Ljk0MXoNCgkJCQkgTTIwNC45NjEsMjE0Ljk3djU3LjM1Nmw2Mi45MzktMTguOTc5bC0xOC4zMTgtMjAuOWwxOS4yMTUtNDYuOTM1TDIwNC45NjEsMjE0Ljk3eiIvPg0KCQk8L2c+DQoJCTxnPg0KCQkJPHBhdGggZmlsbD0iI0ZDRUUxRiIgZD0iTTIuNTQ5LDI1My44N2MwLDAuMjkzLDAuMjQ0LDAuNTMzLDAuNTM4LDAuNTMzbDY1LjczMywxOS41ODZjMC4zLDAsMC41MzktMC4yMzksMC41MzktMC41Mzd2LTU5LjU2NA0KCQkJCWMwLTAuMjkzLTAuMjM5LTAuNTM3LTAuNTM5LTAuNTM3TDIuMTQ5LDE4Mi43NjZjLTAuMjk4LDAtMC41MzksMC4yMzktMC41MzksMC41MzdsMTkuOTkzLDQ4LjgzTDIuNTQ5LDI1My44N3oiLz4NCgkJCTxwYXRoIGQ9Ik02OC44MjEsMjc1LjYwMmgtMC4yMzRMMi43NzksMjU1Ljk5MmMtMS4wMzYtMC4xNDktMS44MzUtMS4wNDYtMS44MzUtMi4xMjJ2LTAuNjA4bDE4Ljc4OS0yMS40MzlMMCwxODMuNjE3di0wLjMxNA0KCQkJCWMwLTEuMTgzLDAuOTY1LTIuMTQ5LDIuMTQ5LTIuMTQ5SDIuNWw2Ni43ODQsMzAuNjM5YzAuOTYsMC4yMTUsMS42ODYsMS4wNzMsMS42ODYsMi4wOTZ2NTkuNTY0DQoJCQkJQzcwLjk3MSwyNzQuNjM3LDcwLjAwNSwyNzUuNjAyLDY4LjgyMSwyNzUuNjAyeiBNNS4xNTYsMjUzLjMzN0w2Ny43NSwyNzEuOTl2LTU3LjM2TDQuMjUsMTg1LjUwMmwxOS4yMiw0Ni45NDRMNS4xNTYsMjUzLjMzN3oiDQoJCQkJLz4NCgkJPC9nPg0KCQk8Zz4NCgkJCTxwYXRoIGZpbGw9IiNGQ0VFMUYiIGQ9Ik02OS4zNiwyNzguNzMyYzAsNS4zMzYtNC4zMjYsOS42NjMtOS42NTgsOS42NjNoLTExLjQ1Yy01LjMzMiwwLTkuNjU2LTQuMzI3LTkuNjU2LTkuNjYzdi00NC4zNTkNCgkJCQljMC02LjI2MiwzMC43NjUtMjAuMTIxLDMwLjc2NS0yMC4xMjFzMCwyMS40OTcsMCwyNi44MjlWMjc4LjczMnoiLz4NCgkJCTxwYXRoIGQ9Ik01OS43MDIsMjkwaC0xMS40NWMtNi4yMTEsMC0xMS4yNjgtNS4wNS0xMS4yNjgtMTEuMjY4di00NC4zNTljMC0yLjI2MiwxLjg0Ni01Ljg3NywxNi4yMTctMTMuODE5DQoJCQkJYzcuNjYtNC4yMjgsMTUuNDE3LTcuNzM3LDE1LjQ5Ny03Ljc2OWMwLjQ5Ni0wLjIyNiwxLjA3OS0wLjE4MiwxLjUzNiwwLjExMmMwLjQ2LDAuMjk4LDAuNzM3LDAuODA1LDAuNzM3LDEuMzU0djY0LjQ4DQoJCQkJQzcwLjk3MSwyODQuOTUsNjUuOTE2LDI5MCw1OS43MDIsMjkweiBNNjcuNzUsMjE2Ljc3NGMtMi44NDIsMS4zMzgtNy45NTEsMy44MTMtMTMuMDEyLDYuNjA1DQoJCQkJYy0xNC4xMjcsNy44MS0xNC41MzMsMTAuNjg4LTE0LjUzMywxMC45OTN2NDQuMzU5YzAsNC40NDIsMy42MTEsOC4wNTIsOC4wNDcsOC4wNTJoMTEuNDVjNC40MzgsMCw4LjA0OC0zLjYwOSw4LjA0OC04LjA1Mg0KCQkJCVYyMTYuNzc0eiIvPg0KCQk8L2c+DQoJCTxnPg0KCQkJPHBhdGggZmlsbD0iI0ZDRUUxRiIgZD0iTTIwMi42MTksMjc4LjczMmMwLDUuMzM2LDQuMzI1LDkuNjYzLDkuNjU4LDkuNjYzaDExLjQ0OWM1LjMzNCwwLDkuNjU5LTQuMzI3LDkuNjU5LTkuNjYzdi00NC4zNTkNCgkJCQljMC02LjI2Mi0zMC43NjctMjAuMTIxLTMwLjc2Ny0yMC4xMjFzMCwyMS40OTcsMCwyNi44MjlWMjc4LjczMnoiLz4NCgkJCTxwYXRoIGQ9Ik0yMjMuNzI3LDI5MGgtMTEuNDQ5Yy02LjIxNCwwLTExLjI2OC01LjA1LTExLjI2OC0xMS4yNjh2LTY0LjQ4YzAtMC41NSwwLjI3Ni0xLjA1NywwLjczNC0xLjM1NA0KCQkJCWMwLjQ2LTAuMjk0LDEuMDM1LTAuMzM4LDEuNTM3LTAuMTEyYzAuMDc0LDAuMDMxLDcuODQsMy41NDEsMTUuNDk2LDcuNzY5YzE0LjM3Myw3Ljk0MiwxNi4yMTcsMTEuNTU4LDE2LjIxNywxMy44MTl2NDQuMzU5DQoJCQkJQzIzNC45OTQsMjg0Ljk1LDIyOS45MzksMjkwLDIyMy43MjcsMjkweiBNMjA0LjIzLDIxNi43NzR2NjEuOTU4YzAsNC40NDIsMy42MDksOC4wNTIsOC4wNDcsOC4wNTJoMTEuNDQ5DQoJCQkJYzQuNDM4LDAsOC4wNDctMy42MDksOC4wNDctOC4wNTJ2LTQ0LjM1OWMwLTAuMzA2LTAuNDEtMy4xODktMTQuNTUzLTEwLjk5NkMyMTIuMTY0LDIyMC41ODEsMjA3LjA2OCwyMTguMTA3LDIwNC4yMywyMTYuNzc0eiIvPg0KCQk8L2c+DQoJCTxnPg0KCQkJPHBhdGggZmlsbD0iI0ZDRUUxRiIgZD0iTTIzMy4zODYsMjU4Ljg2NnYtMjAuMjkxYzAtMi4zNjgtMS45MjEtNC4yODktNC4yOTItNC4yODlINDIuODg3Yy0yLjM3MiwwLTQuMjkyLDEuOTIxLTQuMjkyLDQuMjg5DQoJCQkJdjIwLjMwM3YxMC4yODZ2OS41NjhjMCw1LjMzNiw0LjMyNCw5LjY2Myw5LjY1Niw5LjY2M2gxNzUuNDc1YzUuMzM0LDAsOS42NTktNC4zMjcsOS42NTktOS42NjN2LTE5Ljg1NA0KCQkJCUMyMzMuMzg2LDI1OC44NzgsMjMzLjM4NiwyNTguODcyLDIzMy4zODYsMjU4Ljg2NnoiLz4NCgkJCTxwYXRoIGQ9Ik0yMjMuNzI3LDI5MEg0OC4yNTFjLTYuMjExLDAtMTEuMjY4LTUuMDUtMTEuMjY4LTExLjI2OHYtNDAuMTU3YzAtMy4yNTMsMi42NTItNS44OTgsNS45MDQtNS44OThoMTg2LjIwNw0KCQkJCWMzLjI1MiwwLDUuOSwyLjY0Niw1LjksNS44OTh2NDAuMTU3QzIzNC45OTQsMjg0Ljk1LDIyOS45MzksMjkwLDIyMy43MjcsMjkweiBNNDIuODg3LDIzNS44OTJjLTEuNDc4LDAtMi42ODMsMS4yMDUtMi42ODMsMi42ODQNCgkJCQl2NDAuMTU3YzAsNC40NDIsMy42MTEsOC4wNTIsOC4wNDcsOC4wNTJoMTc1LjQ3NWM0LjQzOCwwLDguMDQ3LTMuNjA5LDguMDQ3LTguMDUydi00MC4xNTdjMC0xLjQ3OS0xLjIwMy0yLjY4NC0yLjY4LTIuNjg0DQoJCQkJSDQyLjg4N3oiLz4NCgkJPC9nPg0KCTwvZz4NCgk8Zz4NCgkJPHBhdGggZmlsbD0ibm9uZSIgZD0iTTg1Ljc0Myw3NC45NDljLTAuMTk3LTAuODg0LTAuNjgyLTEuNTQ3LTEuNTA5LTEuNjAxYy0wLjg0MiwwLjA1NC0xLjUwOSwwLjc0Ny0xLjUwOSwxLjYwMWwtMC41MzgsNjguMTUNCgkJCWMwLDAuODkxLDAuNzE5LDEuNjEsMS42MDksMS42MWgxNi45MDZjMC44ODUsMCwyLjc0Ny0wLjQsMS42MzItNC41MzlMODUuNzQzLDc0Ljk0OXoiLz4NCgkJPHBhdGggZmlsbD0ibm9uZSIgZD0iTTY2LjI1NiwxNDQuNjRjMCwwLDAuMTYtMC4wMTEsMC4zODQsMC4wN2gxMi42MDhjMC44OSwwLDEuNjA5LTAuNzIsMS42MDktMS42MXYtNjguMTUNCgkJCWMwLTAuODkxLTAuNzItMS42MTEtMS42MDktMS42MTFoLTAuMzM3Yy0wLjg5MSwwLTEuMzE3LDAuNjg4LTEuNjEsMS42MTFMNjAuNzEsMTQwLjE3MWMtMS4xMTQsNC4xMzksMC43NDgsNC41MzksMS42MzEsNC41MzkNCgkJCWgwLjUyMmMwLjE0NC0wLjAzOSwwLjI5OS0wLjA3LDAuNDg2LTAuMDdDNjUuNDA4LDE0NC42NCw2Ni4yNTYsMTQ0LjY0LDY2LjI1NiwxNDQuNjR6Ii8+DQoJCTxwYXRoIGZpbGw9Im5vbmUiIGQ9Ik04NC4xMzIsNzMuMzM4YzAuMDMzLDAsMC4wNjUsMC4wMTEsMC4xMDEsMC4wMTFjMC4wMzMsMCwwLjA2NS0wLjAxMSwwLjEwMi0wLjAxMUg4NC4xMzJ6Ii8+DQoJCTxwYXRoIGQ9Ik0xMDguMzAxLDE0Ni4xMDdjMCwwLDAuMDExLTAuMTk0LTAuNjQtMC41MTJjLTAuMzI2LTAuMTYtMS4xMDQtMC41NjUtMS44NjEtMS4xMzhjLTAuODY1LTAuNjU2LTEuMzA4LTEuMjg5LTEuMzA4LTEuMjg5DQoJCQlMODIuNDEsNDguNjU3bC0wLjA5MS0wLjE0NGMtMS42NjQtMS42MzgtMy41MjktMC41OTgtMy41MjktMC41OThjLTEuMDE5LDAuNjQxLTAuMjQ2LDEuMjIyLDAuNTQ5LDEuNDg4DQoJCQljMS40NSwwLjQwNiwxLjQ1LDAuOTQ5LDEuNDUsMC45NDlzLTIxLjQzOSw4OS43MjctMjEuOTM1LDkxLjEzNmMtMC40OTEsMS40MDYtMS4xMTMsMi4xMDItMi43MDMsMy42MjENCgkJCWMtMS41ODksMS41MjQtMC4yMjUsMi4yODIsMC41MTgsMi43NzFjMC43MzUsMC40OTIsMS4zMTYsMS4wMjksMi4xNjUsMS43MDJjMC44NTQsMC42NzEsNC45NjUsNy40NjYsNS42OCw4Ljc4OA0KCQkJYzAuNzEzLDEuMzE2LDEuOTg5LDEuNjMzLDEuOTg5LDEuNjMzczIuMTIzLDAsNS4yMSwwYy0wLjI4My0wLjM5NS0wLjg3OS0xLjEzMS0xLjUzLTEuNDI0Yy0wLjkwNy0wLjQtMS41NTMtMC40NDktMS45NDctMC43ODkNCgkJCWMtMC4zODgtMC4zNDgtMC42NDYtMS41OTEtMC43NjgtMi4zMzdjLTAuMTIyLTAuNzUxLTAuNjgzLTEuNTY3LTEuMzMzLTIuNDk1Yy0wLjY0Ni0wLjkyOS0wLjQ2OS0xLjQ2Mi0wLjg5Ni0yLjEyMg0KCQkJYy0wLjQyLTAuNjYzLTAuNTMzLTEuNzkyLTEuMTczLTIuMjkzYy0wLjYzNS0wLjUwMS0xLjM4Ni0wLjcxMS0xLjY0My0xLjAxOWMtMC4xODctMC4yMjUtMC45NTUtMi40MTYsMC40NDItMi44MTZoLTAuNTIyDQoJCQljLTAuODg0LDAtMi43NDYtMC40LTEuNjMxLTQuNTM5bDE2LjU5MS02NS4yMjJjMC4yOTMtMC45MjMsMC43MTktMS42MTEsMS42MS0xLjYxMWgwLjMzN2MwLjg5LDAsMS42MDksMC43MjEsMS42MDksMS42MTF2NjguMTUNCgkJCWMwLDAuODkxLTAuNzIsMS42MS0xLjYwOSwxLjYxSDY2LjY0YzAuNDEyLDAuMTQzLDEuMDU3LDAuNTgsMS40MDksMS45NDZjMC4zOTksMC45MzgsMC44OTEsMS41ODUsMS44MjksMi40NzgNCgkJCWMwLjk0MiwwLjg5NywyLjI2MSwyLjA0NiwyLjQ4NCwzLjQwMmMwLjIyNCwxLjM2MS0wLjA5LDIuODYxLDAuODA2LDIuODE3YzAuODkxLTAuMDQ3LDIuODU4LTAuNjkyLDMuOTU3LDAuOTM4DQoJCQljMC45OTIsMS40NzksMS45MDMsMi44NjUsMS4xMjUsMy43MTNjNy41ODgsMCwxNi4yMjgsMCwxNy4xODcsMGMxLjc0LDAsMi42OTQtMS40NDEsMi42OTQtMS40NDFzMy41Mi02LjQzMiw0LjcyNi04LjM5OA0KCQkJYzEuMjExLTEuOTY3LDIuMjY1LTEuODUyLDMuNjg5LTIuNjY3YzAuOTIzLTAuNTMxLDEuMzk4LTAuNzgzLDEuNjE2LTAuOTlDMTA4LjM3NSwxNDYuMzE0LDEwOC4zMDEsMTQ2LjEwNywxMDguMzAxLDE0Ni4xMDd6DQoJCQkgTTEwMC43MDIsMTQ0LjcxSDgzLjc5NWMtMC44OSwwLTEuNjA5LTAuNzItMS42MDktMS42MWwwLjUzOC02OC4xNWMwLTAuODU0LDAuNjY3LTEuNTQ3LDEuNTA5LTEuNjAxDQoJCQljLTAuMDM2LDAtMC4wNjgtMC4wMTEtMC4xMDEtMC4wMTFoMC4yMDNjLTAuMDM3LDAtMC4wNjksMC4wMTEtMC4xMDIsMC4wMTFjMC44MjcsMC4wNTQsMS4zMTIsMC43MTcsMS41MDksMS42MDFsMTYuNTkxLDY1LjIyMg0KCQkJQzEwMy40NDgsMTQ0LjMxLDEwMS41ODYsMTQ0LjcxLDEwMC43MDIsMTQ0LjcxeiIvPg0KCQk8cGF0aCBmaWxsPSIjRkNFRTFGIiBkPSJNNzcuMTI1LDE1Ni4yOTJjLTEuMDk4LTEuNjMxLTMuMDY2LTAuOTg1LTMuOTU3LTAuOTM4Yy0wLjg5NiwwLjA0NC0wLjU4My0xLjQ1Ni0wLjgwNi0yLjgxNw0KCQkJYy0wLjIyMy0xLjM1Ni0xLjU0Mi0yLjUwNS0yLjQ4NC0zLjQwMmMtMC45MzgtMC44OTMtMS40My0xLjUzOS0xLjgyOS0yLjQ3OGMtMC4zNTItMS4zNjYtMC45OTgtMS44MDQtMS40MDktMS45NDZoLTMuNzc2DQoJCQljLTEuMzk2LDAuNC0wLjYyOCwyLjU5Mi0wLjQ0MiwyLjgxNmMwLjI1NiwwLjMwOCwxLjAwNywwLjUxOCwxLjY0MywxLjAxOWMwLjY0LDAuNTAxLDAuNzUyLDEuNjMsMS4xNzMsMi4yOTMNCgkJCWMwLjQyNywwLjY2LDAuMjUsMS4xOTMsMC44OTYsMi4xMjJjMC42NTEsMC45MjgsMS4yMTIsMS43NDQsMS4zMzMsMi40OTVjMC4xMjIsMC43NDYsMC4zNzksMS45ODksMC43NjgsMi4zMzcNCgkJCWMwLjM5NSwwLjM0LDEuMDQsMC4zODksMS45NDcsMC43ODljMC42NTEsMC4yOTMsMS4yNDgsMS4wMjksMS41MywxLjQyNGMxLjkwNCwwLDQuMTcsMCw2LjUzOSwwDQoJCQlDNzkuMDI4LDE1OS4xNTcsNzguMTE3LDE1Ny43NzEsNzcuMTI1LDE1Ni4yOTJ6Ii8+DQoJPC9nPg0KCTxnPg0KCQk8cGF0aCBkPSJNMTY1Ljk1NSwxNDcuMzkzYzEuNTIsMC42MTIsMi40MzMsMC44MTEsMy42NDQsMi43NzJjMS4yMDQsMS45NjcsNC44MTUsOC4zOTgsNC44MTUsOC4zOThzMC45NTQsMS40MzUsMi42OTksMS40MzUNCgkJCWMxLjc0MiwwLDI4LjkzLDAsMjguOTMsMHMxLjI3My0wLjMxLDEuOTktMS42MzJjMC43MTUtMS4zMTYsNC44MjYtOC4xMTEsNS42NzktOC43ODJjMC44NDktMC42NzMsMS40My0xLjIxLDIuMTY1LTEuNzAyDQoJCQljMC43NDEtMC40ODksMi4xMDctMS4yNDcsMC41MTgtMi43NzFjLTEuNTg5LTEuNTItMi4yMTMtMi4yMTUtMi43MDUtMy42MjFjLTAuNDk0LTEuNDA5LTIxLjkzNC05MS4xMzYtMjEuOTM0LTkxLjEzNg0KCQkJczAtMC41NSwxLjQ1MS0wLjk0OWMwLjc5NS0wLjI2NywxLjU2OC0wLjg0OCwwLjU0OS0xLjQ4OGMwLDAtMS44NjctMS4wNC0zLjUyOSwwLjU5OGwtMC4wOTIsMC4xNDRsLTIyLjA4Miw5NC41MTINCgkJCWMwLDAtMC4xNzcsMC41MzItMS4xODYsMS4yMDVjLTAuNzgzLDAuNTIxLTEuNTA4LDEuMDQ0LTEuODI0LDEuMjI2Yy0wLjE1OCwwLjA5Ny0wLjI5OCwwLjI3OC0wLjI5OCwwLjI3OA0KCQkJUzE2NC4zMDIsMTQ2LjcyNiwxNjUuOTU1LDE0Ny4zOTN6IE0xOTEuNjg2LDc0Ljk0OWMwLTAuODkxLDAuNzIzLTEuNjExLDEuNjEyLTEuNjExaDAuMzM2YzAuODksMCwxLjMyMiwwLjY4OCwxLjYxLDEuNjExDQoJCQlsMTYuNTkyLDY1LjIyMmMxLjExMyw0LjEzOS0wLjc0OCw0LjUzOS0xLjYzMyw0LjUzOWgtMTYuOTA1Yy0wLjg5LDAtMS42MTItMC43Mi0xLjYxMi0xLjYxVjc0Ljk0OXogTTE3MC4yMTcsMTQwLjE3MQ0KCQkJbDE2LjU4Ni02NS4yMjJjMC4xOTctMC44ODQsMC42ODgtMS41NDcsMS41MDgtMS42MDFjLTAuMDMxLDAtMC4wNjMtMC4wMTEtMC4wOTUtMC4wMTFoMC4xOTdjLTAuMDMyLDAtMC4wNjUsMC4wMTEtMC4xMDMsMC4wMTENCgkJCWMwLjg0NCwwLjA1NCwxLjUxLDAuNzQ3LDEuNTEsMS42MDFsMC41MzksNjguMTVjMCwwLjg5MS0wLjcyMSwxLjYxLTEuNjExLDEuNjFoLTE2Ljg5OQ0KCQkJQzE3MC45NTcsMTQ0LjcxLDE2OS4wOTcsMTQ0LjMxLDE3MC4yMTcsMTQwLjE3MXoiLz4NCgkJPHBhdGggZmlsbD0iI0ZDRUUxRiIgZD0iTTE4NS41NDMsMTU2LjI5MmMtMS4wOTMtMS42MzYtMy4wNjEtMC45ODUtMy45NTYtMC45NDJjLTAuODk3LDAuMDQ4LTAuNTgzLTEuNDUyLTAuODA2LTIuODEzDQoJCQljLTAuMjI1LTEuMzU2LTEuNTQxLTIuNTA1LTIuNDgtMy40MDJjLTAuOTM4LTAuODkzLTEuNDM1LTEuNTM5LTEuODM0LTIuNDc4Yy0wLjM0Ni0xLjM2Ni0wLjk5Mi0xLjgwNC0xLjQwNy0xLjk0NmgtMy43NzYNCgkJCWMtMS4zOTcsMC40LTAuNjMxLDIuNTkyLTAuNDQxLDIuODE2YzAuMjU2LDAuMzA4LDEuMDA3LDAuNTE4LDEuNjQxLDEuMDE5YzAuNjQxLDAuNTAxLDAuNzU0LDEuNjMsMS4xOCwyLjI5Mw0KCQkJYzAuNDIyLDAuNjU2LDAuMjQ0LDEuMTkzLDAuODkxLDIuMTIyYzAuNjUsMC45MjgsMS4yMDksMS43NDQsMS4zMzMsMi40OWMwLjEyMywwLjc1MSwwLjM3OSwxLjk5LDAuNzY3LDIuMzQyDQoJCQljMC4zOTYsMC4zNCwxLjA0LDAuMzg5LDEuOTQ3LDAuNzg5YzAuNjU2LDAuMjkzLDEuMjQ5LDEuMDI5LDEuNTM1LDEuNDE3YzEuODk4LDAsNC4xNjYsMCw2LjUzMywwDQoJCQlDMTg3LjQ0NiwxNTkuMTU3LDE4Ni41MzUsMTU3Ljc3MSwxODUuNTQzLDE1Ni4yOTJ6Ii8+DQoJPC9nPg0KCTxnPg0KCQk8cGF0aCBmaWxsPSIjRkNFRTFGIiBkPSJNMTE3LjI4MiwxMTkuNzM2bDEuNDA4LTEuMDA0YzAsMCwxLjA3Mi0wLjg3NSwyLjI4MiwxLjAwNGMxLjIwNCwxLjg3NiwxLjQ3MywxLjg3NiwxLjY3NSwyLjg4Mw0KCQkJYzAuMjAzLDEuMDA5LTAuMjY3LDIuNTUtMC40NzEsMi40OGMtMC4yMDItMC4wNjMtMC4yMDItMC4wNjMtMC4yMDItMC4wNjNzLTAuOTM4LDAuMjAxLTIuNDE2LTEuNDA5DQoJCQljLTEuNDcyLTEuNjA4LTIuMDEtMS44MTItMi4wMS0xLjgxMlMxMTYuMjEsMTIwLjgxMiwxMTcuMjgyLDExOS43MzZ6Ii8+DQoJCTxwYXRoIGZpbGw9IiNGQ0VFMUYiIGQ9Ik0xMjQuMzIyLDExNi40NDljMCwwLDAuNDA1LDMuNjIxLDEuMjEsNC42OTNjMC40NjksMC40MDUsMC44MDQsMS40MDgsMS4zMzgsMC40MDUNCgkJCWMwLjQwNC0wLjY3MiwwLjQ2OC0wLjg0MywwLjUzOS0yLjMzNWMwLjA2OC0xLjQ4OSwwLTMuNTY4LDAtMy41NjhzLTAuMjAyLTEuODEzLTEuMTQxLTEuNzQ0DQoJCQlDMTI1LjMyOSwxMTMuOTY1LDEyNC4wNjQsMTE0Ljc1NCwxMjQuMzIyLDExNi40NDl6Ii8+DQoJCTxwYXRoIGZpbGw9IiNGQ0VFMUYiIGQ9Ik0xMzAuMTYxLDExNS43MTRjMCwwLDAuNCw0Ljg5LDAuMzM1LDYuMjY3Yy0wLjA2OCwxLjM4MS0wLjA2Myw0LjU5Ny0wLjE2NCw1LjEzNw0KCQkJYy0wLjEwOCwwLjUzMiwwLjY5NywyLjE0MywxLjM3MSwxLjkzOWMwLjY3LTAuMTk3LDEuNjA5LTEuODc3LDEuODExLTMuMzVjMC4xOTktMS40NzcsMC4wNjQtNS41MDMsMC01Ljk3MQ0KCQkJYy0wLjA2OS0wLjQ3MS0wLjM5NC0xLjc0NSwwLjEwOC0yLjU1MWMwLjQ5Ni0wLjgwNSwwLjU3Ni0zLjY4OSwwLTQuMjI0QzEzMy4wNDYsMTEyLjQyMywxMzAuNjk0LDExMS4zNTIsMTMwLjE2MSwxMTUuNzE0eiIvPg0KCQk8cGF0aCBmaWxsPSIjRkNFRTFGIiBkPSJNMTQwLjAyMSwxMTYuMTEzbDEuMTM2LTEuNjc0YzAsMCwxLjQxNC0xLjk0NiwyLjA3OSwwYzAuMjAzLDAuOTM4LDAuMzM2LDMuMDgyLDAuNDA2LDQuMDkxDQoJCQljMC4wNjQsMS4wMDMsMC43MzYsMi40MTUsMS4zMzksMS45NDZjMC42MDgtMC40NzUsMC40NjktMy4yMjIsMC44MDYtMy45NjNjMC4zMzYtMC43MzQsMS40NzctMS42NzUsMy4xNS0xLjMzOQ0KCQkJYzEuNjgyLDAuMzM2LDIuMDgsMC43MzYsMi4wOCwwLjczNmMwLjQwNiwwLjIwMiwwLjY3MiwxLjIxLDAsMS42MWMtMC42NjYsMC40MDctMC44NjksMS4xNDItMS4wMDMsMS41NDENCgkJCWMtMC4xMzgsMC40MDYtMC42MDYsMS43NDktMC42NzEsMi4zNTNjLTAuMDY4LDAuNjA0LTEuNDc4LDEuMjA0LTIuMDEsMS4yNzRjLTAuNTQxLDAuMDY0LTEuNDczLDEuMDAyLTEuNjExLDEuNjENCgkJCWMtMC4xMzMsMC42MDMtMS45NDcsMS4zMzktMy4xNTEsMEMxNDEuNzY1LDEyMy40OTQsMTM4LjY3OCwxMjAuODEyLDE0MC4wMjEsMTE2LjExM3oiLz4NCgkJPHBhdGggZmlsbD0iI0ZDRUUxRiIgZD0iTTEzMi42MiwxMzEuMzM5YzAsMCwwLjk3LTEuMjA1LDEuNDAyLTEuNDA3YzAuNDMyLTAuMjAzLDEuNzA3LDAuMDY5LDIuNDQyLDEuMDcyDQoJCQljMC42MDMsMC44MDUsMS4zNCwwLjYwMywyLjA3OSwxLjA3MWMwLjczNywwLjQ3NywyLjE0NSwyLjgyMSwxLjgwOSwzLjc2Yy0wLjMzLDAuOTM4LTEuMjY4LDEuODA4LTIuMTQ0LDEuNDc5DQoJCQljLTAuODc0LTAuMzM4LTIuNDc5LTAuNzQxLTMuNDg3LTAuNjcyYy0xLjAwNywwLjA2My03LjI3OS0wLjEzNC03LjI3OS0wLjEzNHMtMi4yNDctMC41MzgtMC44MzctMS45NDcNCgkJCWMxLjA3Mi0xLjAwOSwyLjg4NC0yLjQ4NSw0LjAyNi0yLjY4M2MxLjE0MS0wLjIwMiwxLjExNSwwLDEuNDYxLDBDMTMyLjQzOCwxMzEuODc4LDEzMi42MiwxMzEuMzM5LDEzMi42MiwxMzEuMzM5eiIvPg0KCQk8cGF0aCBmaWxsPSIjRkNFRTFGIiBkPSJNMTIxLjAzNiwxNTMuOTQ3YzEuMzk4LTAuMTk5LDIuNDE2LDAuMzk4LDMuMjUzLDAuMjY1YzAuODM4LTAuMTMyLDAuNzgzLTAuNzM1LDEuODUyLTIuNDc5DQoJCQljMS4wNjYtMS43NDMsMS44NzEtMy4yNDIsMS44NzEtMy4yNDJzMC45MzgtMS4zNDYsMi4xNSwwYzEuMjA1LDEuMzM5LDMuMTYyLDMuNDQ1LDMuODYxLDMuNzc1DQoJCQljMC42OTksMC4zMzcsMi4yNCwwLjQ2OSwzLjcxOCwwLjQwNGMxLjQ3Ny0wLjA2NywyLjE4LTAuMzM2LDIuNjY0LTEuMDcyYzAuNDg2LTAuNzM5LDAuMjItMi4yODMsMC4yODMtMi41NDcNCgkJCWMwLjA3LTAuMjczLDAuODA1LTEuNjExLDEuNTQ4LTEuMzQ1YzAuNzM1LDAuMjcyLDEuMDcxLDAuOTMyLDEuMTM1LDMuMjQ4YzAuMjAyLDAuNzEsMC44MDYsMS4zMTIsMS44MTQsMS43MTYNCgkJCWMxLjAwNywwLjQsMy4yODQsMC41OTIsNC4wMjUsMS41NjljMC43MzUsMC45ODEsMS4wMDMsMi40NTcsMS4yMDYsNC4xMzJjMC4yMDMsMS42ODEsMC40NjksOC4yNSwwLjUzNywxMC44DQoJCQljMC4wNjQsMi41NDksMC44MTYsNy4xNzksMC40NzUsOC4zMThjLTAuMzQsMS4xNDMtMC45NDMsNS42OTctNy4xNzgsNS42OTdjLTYuMTc0LDAtMjEuNTk3LDAtMjEuNTk3LDBzLTIuNzIxLTAuMjY5LTIuODc1LTMuNjg1DQoJCQljLTAuMTQ5LTMuNDIxLTAuMDA3LTIzLjUzNi0wLjAwNy0yMy41MzZTMTE5LjMyNSwxNTQuMTkxLDEyMS4wMzYsMTUzLjk0N3oiLz4NCgk8L2c+DQoJPHBhdGggZD0iTTk2LjI5NiwyNzUuNDIxdi0yMy41OTVoLTEwLjU5di01LjQ0NWgyNy45OTh2NS40NDVIMTAzLjE0djIzLjU5NUg5Ni4yOTZ6Ii8+DQoJPHBhdGggZD0iTTE4Ny4xODIsMjc1LjQyMWgtNy40NDFsLTIuOTU5LTYuNTk3SDE2My4yNGwtMi43OTksNi41OTdoLTcuMjU0bDEzLjE5NS0yOS4wNGg3LjIzTDE4Ny4xODIsMjc1LjQyMXogTTE3NC41ODQsMjYzLjkyOQ0KCQlsLTQuNjY3LTEwLjc3M2wtNC41NzUsMTAuNzczSDE3NC41ODR6Ii8+DQoJPHBhdGggZD0iTTE0MS4yNzksMjc1LjQyMWg4LjUzM2wtNy4zMzgtMTEuODk4YzMuNzMyLTAuOTkzLDYuNDktNC4zNzgsNi40OS04LjQyMmMwLTQuODE0LTMuOTAzLTguNzItOC43MTktOC43MmgtMTQuNzA5aC02LjU1OQ0KCQloLTAuMjgzdjI5LjA0aDYuODQydi0xMS42MDJoOC41ODdMMTQxLjI3OSwyNzUuNDIxeiBNMTI1LjUzNywyNTEuMDU0aDEyLjQ4YzIuMSwwLDMuODAxLDEuNywzLjgwMSwzLjgwMg0KCQljMCwyLjEwMy0xLjcwMSwzLjgwNC0zLjgwMSwzLjgwNGgtMTIuNDhWMjUxLjA1NHoiLz4NCjwvZz4NCjwvc3ZnPg0K';
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const icon=(n,cls='ic')=>`<svg class="${cls}" aria-hidden="true"><use href="#i-${n}"></use></svg>`;
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let toastTimer;
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('s');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('s'),2800)}
+
+document.querySelectorAll('.lg').forEach(i=>i.src=LOGO);
+const LI=new Image();
+const LP=new Promise(res=>{
+  let done=false;const finish=v=>{if(!done){done=true;res(v)}};
+  LI.onload=()=>finish(true);LI.onerror=()=>finish(false);LI.src=LOGO;
+  setTimeout(()=>finish(false),3000);
+});
+
+const DEMO_NIDA='19950612123451234512';
+const DEMO_TIN='123456789';
+const DEMO={
+  nida:{id:'TZB-2026-4829130',m:'nida',num:DEMO_NIDA,owner:'Rehema Juma Mwakyusa',biz:'Mama Rehema Food Vendor',phone:'0712 345 678',loc:'Soko Kuu, Mbeya'},
+  tin:{id:'TZB-2026-7319045',m:'tin',num:DEMO_TIN,owner:'Rehema Juma Mwakyusa',biz:'Mama Rehema Food Vendor',phone:'0712 345 678',loc:'Soko Kuu, Mbeya'}
+};
+let regs=[];
+try{const raw=JSON.parse(localStorage.getItem('teos-dbi-regs')||'[]');regs=Array.isArray(raw)?raw:[]}catch(e){regs=[]}
+const all=()=>[DEMO.nida,DEMO.tin,...regs];
+const save=()=>{try{localStorage.setItem('teos-dbi-regs',JSON.stringify(regs))}catch(e){}};
+
+const FIRST=['Rehema','Elias','Neema','Juma','Amina','Baraka','Zawadi','Peter','Upendo','Hassan'];
+const MID=['John','Said','Joseph','Mary','Ally','Anna','Daniel','Grace'];
+const LAST=['Mwakyusa','Mbwilo','Kimaro','Massawe','Mushi','Ngowi','Mwakasege','Komba','Lyimo','Mrema'];
+const REGIONS=['Mbeya','Dar es Salaam','Mwanza','Arusha','Dodoma','Morogoro','Iringa'];
+function hash(s){let h=5381;for(const c of s)h=(h*33+c.charCodeAt(0))>>>0;return h}
+function gen(num,mode){
+  if(mode==='nida'&&num===DEMO_NIDA)return{name:DEMO.nida.owner,region:'Mbeya',dob:'12/06/1995'};
+  if(mode==='tin'&&num===DEMO_TIN)return{name:DEMO.tin.owner,biz:DEMO.tin.biz,region:'Mbeya'};
+  const h=hash(num);
+  const name=`${FIRST[h%10]} ${MID[(h>>3)%8]} ${LAST[(h>>5)%10]}`;
+  const region=REGIONS[(h>>7)%7];
+  if(mode==='tin')return{name,biz:`${LAST[(h>>5)%10]} General Trading`,region};
+  const y=+num.slice(0,4),m=+num.slice(4,6),d=+num.slice(6,8);
+  return{name,region,dob:(y>1900&&y<2012&&m>0&&m<13&&d>0&&d<32)?`${num.slice(6,8)}/${num.slice(4,6)}/${y}`:'—'};
+}
+function newId(){let id;do{id='TZB-2026-'+String(Math.floor(1000000+Math.random()*9000000))}while(all().some(r=>r.id===id));return id}
+
+let C={},K='nida';
+
+const NAV=[['home','Home'],['dbi','Business ID'],['how','How it works'],['faq','FAQ']];
+const NAV_MAP={home:'home',dbi:'dbi',create:'dbi',check:'dbi',how:'how',faq:'faq'};
+function renderNav(){$('#nav').innerHTML=NAV.map(([k,n])=>`<button type="button" data-v="${k}" onclick="go('${k}')">${n}</button>`).join('')}
+function go(v){
+  if(!$('#'+v))v='home';
+  $$('.v').forEach(s=>s.classList.toggle('on',s.id===v));
+  $$('#nav button').forEach(b=>{
+    const on=b.dataset.v===NAV_MAP[v];
+    b.classList.toggle('on',on);
+    if(on)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');
+  });
+  try{history.replaceState(null,'','#'+v)}catch(e){}
+  window.scrollTo(0,0);
+  if(v==='create')updateStepper();
+}
+
+const themeBtn=$('#themeBtn');
+const mq=matchMedia('(prefers-color-scheme: dark)');
+function isDark(){const t=document.documentElement.dataset.theme;return t?t==='dark':mq.matches}
+function syncThemeBtn(){
+  themeBtn.innerHTML=icon(isDark()?'sun':'moon');
+  const label=isDark()?'Switch to light theme':'Switch to dark theme';
+  themeBtn.setAttribute('aria-label',label);themeBtn.title=label;
+}
+function initTheme(){
+  let saved=null;try{saved=localStorage.getItem('teos-theme')}catch(e){}
+  if(saved==='dark'||saved==='light')document.documentElement.dataset.theme=saved;
+  syncThemeBtn();
+  themeBtn.addEventListener('click',()=>{
+    const next=isDark()?'light':'dark';
+    document.documentElement.dataset.theme=next;
+    try{localStorage.setItem('teos-theme',next)}catch(e){}
+    syncThemeBtn();
+  });
+  mq.addEventListener?.('change',syncThemeBtn);
+}
+
+function setStep(n){$$('#stepper li').forEach(li=>{const s=+li.dataset.step;li.classList.toggle('on',s===n);li.classList.toggle('done',s<n)})}
+function updateStepper(){if(!$('#c5').hidden)setStep(3);else if(!$('#c4').hidden)setStep(2);else setStep(1)}
+function resetC(){
+  C={};
+  ['c2','c3','c4','c5'].forEach(id=>$('#'+id).hidden=true);
+  $('#c1').hidden=false;
+  $('#mn')?.classList.remove('on');$('#mt')?.classList.remove('on');
+  ['num','bn','bp','bl'].forEach(id=>{const el=$('#'+id);if(el)el.value=''});
+  if($('#br'))$('#br').value='';
+  if($('#ce'))$('#ce').textContent='';
+  if($('#cf'))$('#cf').textContent='';
+  if($('#c5'))$('#c5').innerHTML='';
+  setStep(1);
+}
+function pick(m){
+  C.m=m;
+  $('#mn').classList.toggle('on',m==='nida');
+  $('#mt').classList.toggle('on',m==='tin');
+  $('#c2').hidden=false;$('#c3').hidden=true;$('#c4').hidden=true;$('#c5').hidden=true;
+  $('#ce').textContent='';
+  $('#nl').textContent=m==='nida'?'NIDA number (20 digits)':'TIN number (9 digits)';
+  $('#num').placeholder=m==='nida'?DEMO_NIDA:DEMO_TIN;
+  $('#num').value='';
+  setStep(1);
+  $('#num').focus();
+}
+function backToIdentity(){
+  $('#c3').hidden=true;$('#c4').hidden=true;$('#c2').hidden=false;
+  $('#num').value=C.num||'';
+  setStep(1);
+  $('#num').focus();
+}
+function useDemo(){
+  if(!C.m)C.m='nida';
+  $('#num').value=C.m==='nida'?DEMO_NIDA:DEMO_TIN;
+  look();
+}
+function look(){
+  const n=$('#num').value.replace(/\D/g,'');
+  const L=C.m==='nida'?20:9;
+  if(n.length!==L){$('#ce').textContent=`Enter a valid ${L}-digit ${C.m==='nida'?'NIDA':'TIN'} number.`;return}
+  $('#ce').textContent='';
+  C.num=n;C.info=gen(n,C.m);
+  const i=C.info;
+  $('#ct').textContent=C.m==='nida'?'Identity found in NIDA':'Business found in TRA records';
+  $('#ci').innerHTML=`<dl class="kv">
+    <dt>Full name</dt><dd>${esc(i.name)}</dd>
+    ${C.m==='nida'?`<dt>Date of birth</dt><dd>${esc(i.dob)}</dd>`:`<dt>Business name (TRA)</dt><dd>${esc(i.biz)}</dd>`}
+    <dt>Region</dt><dd>${esc(i.region)}</dd>
+    <dt>Status</dt><dd><span class="status"><i></i>Found</span></dd>
+  </dl>`;
+  $('#c3').hidden=false;$('#c4').hidden=true;$('#c5').hidden=true;
+  setStep(1);
+  $('#c3').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function confirmId(){
+  const existing=all().find(r=>r.num===C.num&&r.m===C.m);
+  if(existing){toast('This number already has a DBI.');show(existing);return}
+  $('#c4').hidden=false;
+  if(C.info.biz)$('#bn').value=C.info.biz;
+  $('#cf').textContent='';
+  setStep(2);
+  $('#c4').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function make(){
+  const bn=$('#bn').value.trim();
+  const p=$('#bp').value.replace(/\D/g,'').replace(/^255/,'0');
+  if(bn.length<2||!/^0[67]\d{8}$/.test(p)){
+    $('#cf').textContent='Enter a business name and a valid Tanzanian mobile number (e.g. 0712 345 678).';
+    return;
+  }
+  $('#cf').textContent='';
+  const loc=[$('#bl').value.trim(),$('#br').value].filter(Boolean).join(', ');
+  const r={id:newId(),m:C.m,num:C.num,owner:C.info.name,biz:bn,phone:`${p.slice(0,4)} ${p.slice(4,7)} ${p.slice(7)}`,loc};
+  regs.push(r);save();show(r);toast('DBI created.');
+}
+
+function resetK(){K='nida';kpick('nida');$('#kr').innerHTML=''}
+function kpick(m){
+  K=m;
+  $('#kn').classList.toggle('on',m==='nida');$('#kt').classList.toggle('on',m==='tin');
+  $('#kn').setAttribute('aria-selected',m==='nida'?'true':'false');
+  $('#kt').setAttribute('aria-selected',m==='tin'?'true':'false');
+  $('#kvl').textContent=m==='nida'?'NIDA number (20 digits)':'TIN number (9 digits)';
+  $('#kv').value='';$('#kv').placeholder=m==='nida'?DEMO_NIDA:DEMO_TIN;
+  $('#kv').focus();
+}
+function find(){
+  const n=$('#kv').value.replace(/\D/g,'');
+  const h=$('#kr');
+  const L=K==='nida'?20:9;
+  if(n.length!==L){h.innerHTML=`<p class="err">Enter a valid ${L}-digit number.</p>`;return}
+  const r=all().find(x=>x.num===n&&x.m===K);
+  if(!r){h.innerHTML=`<p class="err">No DBI found for this number in this browser.</p><button class="btn" type="button" onclick="resetC();go('create')">Create a DBI</button>`;return}
+  h.innerHTML=panel(r);pvw(r,h);
+}
+
+function qr(text){
+  try{const q=qrcode(0,'M');q.addData(text);q.make();return q.createSvgTag({cellSize:4,margin:0,scalable:true})}
+  catch(e){return '<div class="qr-fallback">QR</div>'}
+}
+function panel(r){
+  return `<div class="card result-card">
+    <div class="res">
+      <div class="qr" aria-label="QR code for ${esc(r.id)}">${qr('TEOS-DBI:'+r.id)}</div>
+      <div class="res-info">
+        <span class="id">${esc(r.id)}</span>
+        <dl class="kv">
+          <dt>Business</dt><dd>${esc(r.biz)}</dd>
+          <dt>Owner</dt><dd>${esc(r.owner)}</dd>
+          <dt>Phone</dt><dd>${esc(r.phone)}</dd>
+          <dt>Location</dt><dd>${esc(r.loc||'—')}</dd>
+          <dt>Status</dt><dd><span class="status"><i></i>Active in pilot</span></dd>
+        </dl>
+      </div>
+    </div>
+    <div class="result-actions">
+      <button class="btn" type="button" onclick="dl('${r.id}')">${icon('download')} Download card</button>
+      <span class="small">PNG · 1600 × 1010</span>
+    </div>
+    <img class="pvi" alt="Preview of the DBI card for ${esc(r.biz)}">
+    <p class="small">Card preview. In production, the QR would resolve to a signed TRA verification record.</p>
+  </div>`;
+}
+function show(r){
+  ['c1','c2','c3','c4'].forEach(id=>$('#'+id).hidden=true);
+  const host=$('#c5');host.hidden=false;
+  host.innerHTML=`<div class="success">${icon('check')} Registration complete</div>`+panel(r)+
+    `<div class="actions-end"><button class="btn ghost" type="button" onclick="resetC();go('dbi')">Back to Business ID</button><button class="btn ghost" type="button" onclick="resetC();go('create')">Create another</button></div>`;
+  setStep(3);pvw(r,host);
+}
+async function pvw(r,host){
+  const img=host.querySelector('.pvi');if(!img)return;
+  try{img.src=(await card(r)).toDataURL('image/png')}catch(e){img.remove()}
+}
+async function dl(id){
+  const r=all().find(x=>x.id===id);if(!r)return toast('Card not found.');
+  try{
+    const c=await card(r);
+    const blob=await new Promise(res=>c.toBlob(res,'image/png'));
+    if(!blob)throw new Error('No image');
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');a.href=url;a.download=`DBI-${r.id}.png`;
+    document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),2000);
+    toast('Card downloaded.');
+  }catch(e){toast('Download failed. Press and hold the card preview to save it.')}
+}
+
+function rrect(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()}
+function fit(x,t,mx,s,w){do{x.font=`${w} ${s}px Georgia,serif`;s-=2}while(x.measureText(t).width>mx&&s>20)}
+async function card(r){
+  const ready=await LP;
+  const W=1600,H=1010,c=document.createElement('canvas');c.width=W;c.height=H;
+  const x=c.getContext('2d');
+  rrect(x,0,0,W,H,48);x.save();x.clip();
+  const g=x.createLinearGradient(0,0,W,H);g.addColorStop(0,'#fff');g.addColorStop(1,'#fff6bf');x.fillStyle=g;x.fillRect(0,0,W,H);
+  if(ready){
+    const lh=470,lw=lh*LI.width/LI.height;
+    x.globalAlpha=.08;x.drawImage(LI,(W-lw)/2,250,lw,lh);x.globalAlpha=1;
+  }
+  x.globalAlpha=.1;x.fillStyle='#000';x.textAlign='center';x.font='italic 700 62px Georgia,serif';x.fillText('Together We Build Our Nation',W/2,835);x.globalAlpha=1;
+  if(ready){
+    const l2=150*LI.width/LI.height;
+    x.font='700 68px Georgia,serif';
+    const t='Tanzania Revenue Authority',tw=x.measureText(t).width;
+    const x0=(W-(l2+30+tw))/2;
+    x.drawImage(LI,x0,36,l2,150);
+    x.textAlign='left';x.fillStyle='#111';x.fillText(t,x0+l2+30,128);
+  }else{
+    x.textAlign='center';x.fillStyle='#111';x.font='700 68px Georgia,serif';x.fillText('Tanzania Revenue Authority',W/2,128);
+  }
+  x.fillStyle='#FFE600';x.fillRect(90,212,W-180,9);
+  x.fillStyle='#111';x.fillRect(90,226,W-180,2);
+  x.textAlign='center';x.fillStyle='#8a6f00';x.font='700 40px Georgia,serif';
+  try{x.letterSpacing='5px'}catch(e){}
+  x.fillText('DIGITAL BUSINESS IDENTITY CARD',W/2,292);
+  try{x.letterSpacing='0px'}catch(e){}
+  x.textAlign='left';
+  const row=(label,value,y,size)=>{
+    x.fillStyle='#777';x.font='600 24px system-ui,sans-serif';x.fillText(label,90,y);
+    x.fillStyle='#111';fit(x,value||'—',820,size,700);x.fillText(value||'—',90,y+58);
+  };
+  row('OWNER',r.owner,360,50);
+  row('BUSINESS NAME',r.biz,490,56);
+  row('LOCATION',r.loc||'—',620,46);
+  row('PHONE NUMBER',r.phone,750,50);
+  const qs=300,cx=W-300,qx=cx-qs/2,qy=360;
+  x.fillStyle='#fff';rrect(x,qx-36,qy-36,qs+72,qs+72,22);x.fill();x.lineWidth=6;x.strokeStyle='#111';x.stroke();
+  x.fillStyle='#111';
+  try{
+    const q=qrcode(0,'M');q.addData('TEOS-DBI:'+r.id);q.make();
+    const n=q.getModuleCount(),m=qs/n;
+    for(let i=0;i<n;i++)for(let j=0;j<n;j++)if(q.isDark(i,j))x.fillRect(qx+j*m,qy+i*m,m+.6,m+.6);
+  }catch(e){x.font='700 60px sans-serif';x.textAlign='center';x.fillText('QR',cx,qy+qs/2)}
+  x.textAlign='center';
+  let fs=30;do{x.font=`700 ${fs}px ui-monospace,Menlo,monospace`;fs--}while(x.measureText('DBI Number : '+r.id).width>520&&fs>18);
+  x.fillStyle='#111';x.fillText('DBI Number : '+r.id,cx,qy+qs+80);
+  x.textAlign='left';x.fillStyle='#666';x.font='600 22px system-ui,sans-serif';
+  x.fillText('Pilot demonstration · Not an official TRA document',90,H-78);
+  x.fillStyle='#111';x.fillRect(0,H-46,W,12);
+  x.fillStyle='#FFE600';x.fillRect(0,H-34,W,34);
+  x.restore();
+  rrect(x,3,3,W-6,H-6,46);x.lineWidth=6;x.strokeStyle='#111';x.stroke();
+  return c;
+}
+
+
+let HK='nida';
+function hkpick(m){
+  HK=m;
+  $('#hkn').classList.toggle('on',m==='nida');
+  $('#hkt').classList.toggle('on',m==='tin');
+  $('#hkl').textContent=m==='nida'?'NIDA number (20 digits)':'TIN number (9 digits)';
+  const inp=$('#hkv');
+  if(inp){inp.placeholder=m==='nida'?DEMO_NIDA:DEMO_TIN;inp.value='';inp.focus();}
+  $('#hke').textContent='';
+  $('#hkr').innerHTML='';
+}
+function hfind(){
+  const inp=$('#hkv');const hke=$('#hke');const hkr=$('#hkr');
+  if(!inp)return;
+  const n=inp.value.replace(/\D/g,'');
+  const L=HK==='nida'?20:9;
+  if(n.length!==L){hke.textContent=`Enter a valid ${L}-digit ${HK==='nida'?'NIDA':'TIN'} number.`;hkr.innerHTML='';return}
+  hke.textContent='';
+  const r=all().find(x=>x.num===n&&x.m===HK);
+  if(!r){hkr.innerHTML=`<p class="err">No DBI found for this number in this browser.</p><button class="btn" type="button" onclick="resetC();go('dbi');resetC();go('create');" style="margin-top:8px">Create a DBI</button>`;return}
+  hkr.innerHTML=panel(r);pvw(r,hkr);
+}
+
+renderNav();
+initTheme();
+const startHash=location.hash.slice(1);
+go(['home','dbi','create','check','how','faq'].includes(startHash)?startHash:'home');
+</script>
+</body>
+</html>
